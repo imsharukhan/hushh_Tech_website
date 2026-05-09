@@ -321,6 +321,58 @@ describe("HushhTechNavDrawer auth gating", () => {
     expect(container.textContent).not.toContain("View Profile");
   });
 
+  it("keeps an explicit close control and separates dialog clicks from backdrop clicks", async () => {
+    mockGetSession.mockResolvedValue({
+      data: { session: null },
+      error: null,
+    });
+    mockGetUser.mockResolvedValue({
+      data: { user: null },
+      error: null,
+    });
+    const onClose = vi.fn();
+
+    await act(async () => {
+      root.render(
+        renderWithProvider(
+          React.createElement(
+            MemoryRouter,
+            null,
+            React.createElement(HushhTechNavDrawer, {
+              isOpen: true,
+              onClose,
+            })
+          )
+        )
+      );
+    });
+    await flush();
+
+    const closeButton = container.querySelector<HTMLButtonElement>(
+      "button[aria-label='Close menu']"
+    );
+    const dialog = container.querySelector<HTMLElement>("[role='dialog']");
+    const backdrop = dialog?.parentElement;
+
+    expect(closeButton).toBeInstanceOf(HTMLButtonElement);
+    expect(dialog?.className).toContain("animate-scaleIn");
+
+    await act(async () => {
+      dialog?.dispatchEvent(new MouseEvent("click", { bubbles: true }));
+    });
+    expect(onClose).not.toHaveBeenCalled();
+
+    await act(async () => {
+      closeButton?.dispatchEvent(new MouseEvent("click", { bubbles: true }));
+    });
+    expect(onClose).toHaveBeenCalledTimes(1);
+
+    await act(async () => {
+      backdrop?.dispatchEvent(new MouseEvent("click", { bubbles: true }));
+    });
+    expect(onClose).toHaveBeenCalledTimes(2);
+  });
+
   it("shows account actions for authenticated users and logout performs a real sign-out", async () => {
     mockGetSession.mockResolvedValue({
       data: { session: MOCK_SESSION },
