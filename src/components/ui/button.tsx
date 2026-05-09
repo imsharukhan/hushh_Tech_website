@@ -37,6 +37,7 @@ const SIZE_CLASSES: Record<ButtonSize, string> = {
 const BASE_CLASSES = [
   "inline-flex items-center justify-center gap-2",
   "font-semibold tracking-wide",
+  "cursor-pointer",
   "disabled:opacity-50 disabled:cursor-not-allowed",
   "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black",
 ].join(" ");
