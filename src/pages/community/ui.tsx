@@ -51,7 +51,7 @@ export default function CommunityPage() {
       />
 
       {/* ═══ Main ═══ */}
-      <main className="px-6 flex-grow max-w-md mx-auto w-full pb-32">
+      <main className="px-6 flex-grow w-full max-w-md md:max-w-2xl lg:max-w-4xl xl:max-w-5xl mx-auto pb-32">
         {/* ── Hero ── */}
         <section className="pt-6 pb-6">
           <div className="inline-flex items-center gap-1.5 px-3 py-1.5 border border-hushh-blue/20 rounded-full mb-6">
@@ -144,9 +144,9 @@ export default function CommunityPage() {
                   </div>
 
                   {/* title */}
-                  <h3 className="text-[15px] font-semibold text-black leading-snug mb-2 group-hover:text-hushh-blue transition-colors line-clamp-2">
+                  <h2 className="text-[15px] font-semibold text-black leading-snug mb-2 group-hover:text-hushh-blue transition-colors line-clamp-2">
                     {post.title}
-                  </h3>
+                  </h2>
 
                   {/* description */}
                   <p className="text-[12px] text-gray-400 font-light leading-relaxed line-clamp-2 mb-3">
