@@ -3,6 +3,11 @@ import config from "../../resources/config/config";
 const ANALYTICS_ID_KEY = "hushh_site_analytics_id";
 const ANALYTICS_SESSION_KEY = "hushh_site_analytics_session_id";
 const MAX_QUERY_HASH_INPUT_LENGTH = 512;
+const ANALYTICS_FAILURE_THRESHOLD = 3;
+const ANALYTICS_FAILURE_COOLDOWN_MS = 60_000;
+
+let analyticsFailureCount = 0;
+let analyticsDisabledUntil = 0;
 
 type AnalyticsProperties = Record<string, string | number | boolean | string[] | number[] | undefined | null>;
 
@@ -245,6 +250,10 @@ export async function trackSiteEvent(eventName: string, options: TrackEventOptio
     return;
   }
 
+  if (Date.now() < analyticsDisabledUntil) {
+    return;
+  }
+
   const routePath = sanitizeAnalyticsPath(
     options.routePath || window.location.pathname
   );
@@ -277,6 +286,7 @@ export async function trackSiteEvent(eventName: string, options: TrackEventOptio
     headers.Authorization = `Bearer ${token}`;
   }
 
+  let didRequestFail = false;
   for (const candidate of getCollectorCandidates()) {
     try {
       const response = await fetch(candidate, {
@@ -287,11 +297,22 @@ export async function trackSiteEvent(eventName: string, options: TrackEventOptio
       });
 
       if (response.ok) {
+        analyticsFailureCount = 0;
         return;
       }
+
+      didRequestFail = true;
     } catch {
+      didRequestFail = true;
       // Try the next candidate in local development.
     }
+  }
+  if (didRequestFail) {
+    analyticsFailureCount += 1;
+  }
+
+  if (analyticsFailureCount >= ANALYTICS_FAILURE_THRESHOLD) {
+    analyticsDisabledUntil = Date.now() + ANALYTICS_FAILURE_COOLDOWN_MS;
   }
 }
 
