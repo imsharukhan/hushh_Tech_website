@@ -447,9 +447,9 @@ const PublicInvestorProfilePage: React.FC = () => {
 
                 {/* Welcome Section */}
                 <section className="py-8">
-                  <h3 className="text-[10px] tracking-[0.2em] text-gray-400 uppercase mb-4 font-medium">
+                  <p className="text-[10px] tracking-[0.2em] text-gray-400 uppercase mb-4 font-medium">
                     {profileEyebrow}
-                  </h3>
+                  </p>
                   <h1
                     className="text-[2.75rem] leading-[1.1] font-normal text-black tracking-tight font-serif"
                     style={{ fontFamily: "'Playfair Display', serif" }}
@@ -500,12 +500,12 @@ const PublicInvestorProfilePage: React.FC = () => {
                 {/* Share Section */}
                 <section className="mb-8">
                   <div className="flex items-center justify-between mb-6">
-                    <h3
+                    <h2
                       className="text-xl text-black font-normal font-serif"
                       style={{ fontFamily: "'Playfair Display', serif" }}
                     >
                       Share Profile
-                    </h3>
+                    </h2>
                     <button
                       onClick={handleOpenProfile}
                       className="p-2 hover:bg-gray-100 rounded-full transition-colors"
@@ -551,12 +551,12 @@ const PublicInvestorProfilePage: React.FC = () => {
                 {visibleInvestorProfileEntries.length > 0 && (
                   <section className="mb-8">
                     <div className="flex items-center justify-between mb-6">
-                      <h3
+                      <h2
                         className="text-xl text-black font-normal font-serif"
                         style={{ fontFamily: "'Playfair Display', serif" }}
                       >
                         Investment Profile
-                      </h3>
+                      </h2>
                       <span className="px-2.5 py-1 bg-hushh-blue/10 text-hushh-blue text-[10px] font-semibold rounded-full uppercase tracking-wide">
                         AI Analyzed
                       </span>
@@ -624,7 +624,7 @@ const PublicInvestorProfilePage: React.FC = () => {
                       <div className="flex items-center gap-3">
                         <Search className="w-6 h-6 text-purple-400" />
                         <div>
-                          <h3 className="text-lg font-semibold text-white">Deep Profile Intelligence</h3>
+                          <h2 className="text-lg font-semibold text-white">Deep Profile Intelligence</h2>
                           <p className="text-xs text-slate-400">Powered by Shadow Investigator AI</p>
                         </div>
                       </div>
@@ -765,12 +765,12 @@ const PublicInvestorProfilePage: React.FC = () => {
                 {/* Personal Information */}
                 {visibleOnboardingFields.length > 0 && (
                   <section className="mb-8">
-                    <h3
+                    <h2
                       className="text-xl text-black font-normal font-serif mb-6"
                       style={{ fontFamily: "'Playfair Display', serif" }}
                     >
                       Personal Information
-                    </h3>
+                    </h2>
                     <div className="space-y-0">
                       {visibleOnboardingFields.map((field) => (
                         <div
@@ -787,12 +787,12 @@ const PublicInvestorProfilePage: React.FC = () => {
 
                 {/* CTA to create own profile */}
                 <section className="mb-8 space-y-3">
-                  <h3
+                  <h2
                     className="text-xl text-black font-normal font-serif mb-2"
                     style={{ fontFamily: "'Playfair Display', serif" }}
                   >
                     Create Your Profile
-                  </h3>
+                  </h2>
                   <p className="text-xs text-gray-500 font-medium mb-4">
                     Get your AI-powered investor profile in minutes
                   </p>
