@@ -59,6 +59,7 @@ export default function OnboardingStep1() {
     setFrequency,
     setInvestmentDay,
     handleNext,
+    handleSkip,
     handleBack,
   } = useStep1Logic();
 
@@ -390,7 +391,7 @@ export default function OnboardingStep1() {
 
           <HushhTechCta
             variant={HushhTechCtaVariant.WHITE}
-            onClick={handleBack}
+            onClick={handleSkip}
           >
             Skip
           </HushhTechCta>

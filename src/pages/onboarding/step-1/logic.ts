@@ -82,6 +82,7 @@ export interface Step1Logic {
   setFrequency: (f: RecurringFrequency) => void;
   setInvestmentDay: (d: string) => void;
   toggleRecurring: () => void;
+  handleSkip: () => void;
   handleNext: () => Promise<void>;
   handleBack: () => void;
 }
@@ -244,6 +245,7 @@ export const useStep1Logic = (): Step1Logic => {
     finally { setIsLoading(false); }
   };
 
+  const handleSkip = () => navigate('/onboarding/step-2');
   const handleBack = () => navigate('/onboarding/financial-link');
 
   return {
@@ -251,6 +253,6 @@ export const useStep1Logic = (): Step1Logic => {
     error, isLoading, isFooterVisible, totalInvestment, hasSelection,
     recurringEnabled, toggleRecurring,
     handleUnitChange, handleAmountClick, handleCustomAmountChange,
-    setFrequency, setInvestmentDay, handleNext, handleBack,
+    setFrequency, setInvestmentDay, handleNext, handleSkip, handleBack,
   };
 };
