@@ -5,7 +5,6 @@ import {
   Heading,
   Text,
   SimpleGrid,
-  Image,
   Spinner,
   AspectRatio,
 } from '@chakra-ui/react'
@@ -45,7 +44,7 @@ const ReportDetail: React.FC<ReportDetailProps> = ({ report, isLoading }) => {
         </Heading>
       )}
       <Text fontSize="sm" color="gray.600" mb={6}>
-        report.date
+        {report.date}
         {report.time && ` at ${report.time}`}
       </Text>
 

@@ -1,13 +1,6 @@
-import { useEffect, type RefObject } from 'react';
+import { useEffect, useRef, type RefObject } from 'react';
 
-const FOCUSABLE_SELECTOR = [
-  'a[href]',
-  'button:not([disabled])',
-  'textarea:not([disabled])',
-  'input:not([disabled])',
-  'select:not([disabled])',
-  '[tabindex]:not([tabindex="-1"])',
-].join(',');
+import { getFocusableElements } from '../utils/keyboardNavigation';
 
 interface UseModalKeyboardNavigationArgs {
   isOpen: boolean;
@@ -24,6 +17,16 @@ export function useModalKeyboardNavigation({
   initialFocusRef,
   restoreFocus = true,
 }: UseModalKeyboardNavigationArgs) {
+  const onCloseRef = useRef(onClose);
+  const initialFocusRefRef = useRef(initialFocusRef);
+  const restoreFocusRef = useRef(restoreFocus);
+
+  useEffect(() => {
+    onCloseRef.current = onClose;
+    initialFocusRefRef.current = initialFocusRef;
+    restoreFocusRef.current = restoreFocus;
+  }, [initialFocusRef, onClose, restoreFocus]);
+
   useEffect(() => {
     if (!isOpen) return;
 
@@ -31,33 +34,24 @@ export function useModalKeyboardNavigation({
       ? document.activeElement
       : null;
 
-    const getFocusableElements = () => {
-      const container = containerRef.current;
-      if (!container) return [];
-
-      return Array.from(container.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTOR)).filter(
-        (element) =>
-          !element.hasAttribute('disabled') &&
-          element.getAttribute('aria-hidden') !== 'true' &&
-          element.offsetParent !== null,
-      );
-    };
-
     const focusInitialElement = () => {
-      const target = initialFocusRef?.current || getFocusableElements()[0] || containerRef.current;
+      const target =
+        initialFocusRefRef.current?.current ||
+        getFocusableElements(containerRef.current)[0] ||
+        containerRef.current;
       target?.focus({ preventScroll: true });
     };
 
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape' && onClose) {
+      if (event.key === 'Escape' && onCloseRef.current) {
         event.preventDefault();
-        onClose();
+        onCloseRef.current();
         return;
       }
 
       if (event.key !== 'Tab') return;
 
-      const focusableElements = getFocusableElements();
+      const focusableElements = getFocusableElements(containerRef.current);
       if (focusableElements.length === 0) {
         event.preventDefault();
         containerRef.current?.focus({ preventScroll: true });
@@ -67,6 +61,14 @@ export function useModalKeyboardNavigation({
       const firstElement = focusableElements[0];
       const lastElement = focusableElements[focusableElements.length - 1];
       const activeElement = document.activeElement;
+      const activeElementIsInsideModal =
+        activeElement instanceof Node && Boolean(containerRef.current?.contains(activeElement));
+
+      if (!activeElementIsInsideModal) {
+        event.preventDefault();
+        (event.shiftKey ? lastElement : firstElement).focus({ preventScroll: true });
+        return;
+      }
 
       if (event.shiftKey && activeElement === firstElement) {
         event.preventDefault();
@@ -77,14 +79,15 @@ export function useModalKeyboardNavigation({
       }
     };
 
-    window.setTimeout(focusInitialElement, 0);
+    const focusTimer = window.setTimeout(focusInitialElement, 0);
     document.addEventListener('keydown', handleKeyDown);
 
     return () => {
+      window.clearTimeout(focusTimer);
       document.removeEventListener('keydown', handleKeyDown);
-      if (restoreFocus && previousActiveElement?.isConnected) {
+      if (restoreFocusRef.current && previousActiveElement?.isConnected) {
         previousActiveElement.focus({ preventScroll: true });
       }
     };
-  }, [containerRef, initialFocusRef, isOpen, onClose, restoreFocus]);
+  }, [containerRef, isOpen]);
 }

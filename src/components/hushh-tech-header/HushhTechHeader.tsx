@@ -10,6 +10,7 @@ import React, { useState } from "react";
 import hushhLogo from "../images/Hushhogo.png";
 import HushhTechNavDrawer from "../hushh-tech-nav-drawer/HushhTechNavDrawer";
 import { useStockQuotes, StockQuote } from "../../hooks/useStockQuotes";
+import { SkipToContentLink } from "../ui/SkipToContentLink";
 
 /* ── Chip-based ticker component — matches Navbar design ── */
 const TickerChip = ({ quote, isLoading }: { quote: StockQuote; isLoading?: boolean }) => (
@@ -20,6 +21,8 @@ const TickerChip = ({ quote, isLoading }: { quote: StockQuote; isLoading?: boole
         <img
           src={quote.logo}
           alt={`${quote.displaySymbol} logo`}
+          width="14"
+          height="14"
           className="w-3.5 h-3.5 object-contain"
           loading="lazy"
           onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }}
@@ -64,6 +67,8 @@ const HushhTechHeader: React.FC<HushhTechHeaderProps> = ({
 
   return (
     <>
+      <SkipToContentLink />
+
       {/* Fixed header — always pinned to top */}
       <header
         className={`fixed top-0 left-0 right-0 z-50 bg-white shadow-sm ${className}`}
@@ -76,6 +81,8 @@ const HushhTechHeader: React.FC<HushhTechHeaderProps> = ({
               <img
                 src={hushhLogo}
                 alt="Hushh Logo"
+                width="44"
+                height="44"
                 className="w-11 h-11 object-contain"
               />
             </div>

@@ -1,93 +1,96 @@
-/**
- * NotFound (404) Page
- *
- * Displayed when users navigate to non-existent routes.
- * Provides clear messaging and navigation options to guide users back to content.
- *
- * Features:
- * - Large 404 display for immediate recognition
- * - Clear error messaging
- * - Primary actions: Go Home, Contact Support
- * - Quick links to popular pages
- * - Uses the existing app shell without introducing duplicate navigation chrome
- */
 import { Link } from 'react-router-dom';
+import hushhLogo from '../components/images/Hushhogo.png';
+
+const quickLinks = [
+  { label: 'Home', to: '/' },
+  { label: 'Fund A', to: '/discover-fund-a' },
+  { label: 'Community', to: '/community' },
+  { label: 'Contact', to: '/contact' },
+];
 
 export default function NotFound() {
   return (
-    <div className="min-h-screen flex flex-col bg-white">
-      {/* Main content - centered 404 error page */}
-      <main className="flex-grow flex items-center justify-center px-6 py-12">
-        <div className="text-center max-w-md">
-          {/* Large 404 number */}
-          <h1 className="text-[10rem] leading-none font-black text-gray-100 select-none">
-            404
-          </h1>
+    <main className="relative min-h-screen overflow-hidden bg-black text-white">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(38,124,255,0.26),_transparent_36%),radial-gradient(circle_at_bottom_right,_rgba(255,255,255,0.08),_transparent_28%)]" />
 
-          {/* Error message */}
-          <h2 className="text-3xl font-bold text-gray-900 mt-6 mb-3 tracking-tight">
-            Page Not Found
-          </h2>
-          <p className="text-base text-gray-600 leading-relaxed mb-8">
-            The page you're looking for doesn't exist or has been moved.
-          </p>
+      <div className="relative mx-auto flex min-h-screen w-full max-w-6xl items-center px-6 py-16 sm:px-8 lg:px-12">
+        <div className="grid w-full gap-12 lg:grid-cols-[minmax(0,1.2fr)_minmax(300px,0.8fr)] lg:items-center">
+          <section className="max-w-2xl">
+            <div className="inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/5 px-4 py-2 backdrop-blur">
+              <img
+                src={hushhLogo}
+                alt="Hushh"
+                className="h-8 w-8 rounded-lg object-contain"
+              />
+              <div className="leading-tight">
+                <p className="text-sm font-semibold tracking-tight">hushh</p>
+                <p className="text-[0.65rem] uppercase tracking-[0.24em] text-white/55">
+                  Technologies
+                </p>
+              </div>
+            </div>
 
-          {/* Action buttons */}
-          <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <Link
-              to="/"
-              className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-black text-white rounded-full font-semibold hover:bg-black/80 transition-colors"
-            >
-              <span className="material-symbols-outlined text-[1.2rem]">
-                home
-              </span>
-              <span>Go Home</span>
-            </Link>
-            <Link
-              to="/contact"
-              className="inline-flex items-center justify-center gap-2 px-6 py-3 border-2 border-gray-300 text-gray-700 rounded-full font-semibold hover:bg-gray-50 transition-colors"
-            >
-              <span className="material-symbols-outlined text-[1.2rem]">
-                support_agent
-              </span>
-              <span>Contact Support</span>
-            </Link>
-          </div>
-
-          {/* Helpful links */}
-          <div className="mt-12 pt-8 border-t border-gray-200">
-            <p className="text-sm text-gray-500 mb-4 font-medium">
-              Popular pages:
+            <p className="mt-8 text-xs font-medium uppercase tracking-[0.3em] text-hushh-blue">
+              Error 404
             </p>
-            <div className="flex flex-wrap gap-2 justify-center">
+            <h1 className="mt-4 max-w-xl text-5xl font-semibold tracking-tight text-white sm:text-6xl">
+              Page not found.
+            </h1>
+            <p className="mt-5 max-w-xl text-base leading-7 text-white/68 sm:text-lg">
+              The page you requested does not exist, may have moved, or is no
+              longer publicly available.
+            </p>
+
+            <div className="mt-10 flex flex-col gap-4 sm:flex-row">
               <Link
-                to="/discover-fund-a"
-                className="px-4 py-2 text-sm bg-gray-100 text-gray-700 rounded-full hover:bg-gray-200 transition-colors"
+                to="/"
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-black transition hover:bg-gray-100"
               >
-                Fund A
+                <span>Back to Home</span>
+                <span className="material-symbols-outlined text-base">
+                  arrow_forward
+                </span>
               </Link>
               <Link
-                to="/community"
-                className="px-4 py-2 text-sm bg-gray-100 text-gray-700 rounded-full hover:bg-gray-200 transition-colors"
+                to="/contact"
+                className="inline-flex items-center justify-center gap-2 rounded-full border border-white/15 bg-white/5 px-6 py-3 text-sm font-semibold text-white transition hover:border-white/30 hover:bg-white/10"
               >
-                Community
-              </Link>
-              <Link
-                to="/faq"
-                className="px-4 py-2 text-sm bg-gray-100 text-gray-700 rounded-full hover:bg-gray-200 transition-colors"
-              >
-                FAQ
-              </Link>
-              <Link
-                to="/about/leadership"
-                className="px-4 py-2 text-sm bg-gray-100 text-gray-700 rounded-full hover:bg-gray-200 transition-colors"
-              >
-                About Us
+                <span>Contact Hushh</span>
+                <span className="material-symbols-outlined text-base">
+                  support_agent
+                </span>
               </Link>
             </div>
-          </div>
+          </section>
+
+          <aside className="rounded-[2rem] border border-white/10 bg-white/5 p-6 shadow-2xl shadow-black/30 backdrop-blur-sm sm:p-8">
+            <div className="rounded-[1.5rem] border border-white/10 bg-black/40 p-6">
+              <p className="text-[5rem] font-semibold leading-none tracking-[-0.08em] text-white/12 sm:text-[7rem]">
+                404
+              </p>
+              <div className="mt-6 space-y-4">
+                <p className="text-sm uppercase tracking-[0.24em] text-white/45">
+                  Quick links
+                </p>
+                <div className="grid gap-3">
+                  {quickLinks.map((link) => (
+                    <Link
+                      key={link.to}
+                      to={link.to}
+                      className="flex items-center justify-between rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-3 text-sm text-white/80 transition hover:border-hushh-blue/50 hover:bg-hushh-blue/10 hover:text-white"
+                    >
+                      <span>{link.label}</span>
+                      <span className="material-symbols-outlined text-base">
+                        north_east
+                      </span>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </aside>
         </div>
-      </main>
-    </div>
+      </div>
+    </main>
   );
 }
