@@ -259,7 +259,7 @@ export default function Hero() {
       {/* Scrollable content */}
       <Box
         as="main"
-        maxW="393px"
+        maxW={{ base: "393px", md: "768px", lg: "1024px" }}
         mx="auto"
         pb="120px"
         pt="50px"
@@ -527,7 +527,7 @@ export default function Hero() {
         borderTop="0.5px solid rgba(0,0,0,0.1)"
         pb="28px" pt={2} px={6} zIndex={40}
       >
-        <Flex justify="space-between" align="center" maxW="393px" mx="auto">
+        <Flex justify="space-between" align="center" maxW={{ base: "393px", md: "768px", lg: "1024px" }} mx="auto">
           <TabItem icon="home" label="Home" active />
           <Box onClick={() => navigate("/hushh-user-profile")} cursor="pointer">
             <TabItem icon="pie_chart" label="Portfolio" />
