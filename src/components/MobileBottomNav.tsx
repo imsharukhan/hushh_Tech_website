@@ -121,6 +121,7 @@ const MobileBottomNav: React.FC = () => {
               onClick={() => navigate(item.path)}
               transition="all 0.2s ease"
               role="group"
+              aria-current={active ? 'page' : undefined}
               _active={{ transform: 'scale(0.95)' }}
             >
               {/* Icon Container - Blue circle when active */}
