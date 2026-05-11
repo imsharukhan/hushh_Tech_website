@@ -200,7 +200,7 @@ export function useMeetCeoLogic() {
   }, [fetchCalendarSlots, paymentState]);
 
   const handleContinue = () => navigate('/hushh-user-profile');
-  const handleBack = () => navigate('/onboarding/step-10');
+  const handleBack = () => navigate('/onboarding/verify');
 
   return {
     paymentState,
