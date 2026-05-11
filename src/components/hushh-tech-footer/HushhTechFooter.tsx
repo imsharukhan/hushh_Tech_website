@@ -124,8 +124,9 @@ const HushhTechFooter: React.FC<HushhTechFooterProps> = ({
       <button
         key={tab.id}
         onClick={() => handleTabClick(tab)}
-        className="flex flex-col items-center gap-1 group cursor-pointer bg-transparent border-none outline-none"
+        className="flex flex-col items-center gap-1 group cursor-pointer bg-transparent border-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white rounded-lg"
         aria-label={tab.label}
+        aria-current={isActive ? "page" : undefined}
         tabIndex={0}
       >
         {tab.id === HushhFooterTab.FUND_A ? (

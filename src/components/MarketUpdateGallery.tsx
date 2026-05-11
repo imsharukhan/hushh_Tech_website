@@ -160,6 +160,8 @@ const MarketUpdateGallery: React.FC<MarketUpdateGalleryProps> = ({
           // Show actual images once loaded
           images.map((image) => (
             <Box 
+              as="button"
+              type="button"
               key={image.name} 
               borderRadius="lg" 
               overflow="hidden"
@@ -169,8 +171,11 @@ const MarketUpdateGallery: React.FC<MarketUpdateGalleryProps> = ({
               position="relative"
               cursor="pointer"
               onClick={() => handleImageClick(image.url)}
+              aria-label={`Open market analysis chart ${image.name.match(/^\d+/)?.[0] || image.name}`}
+              textAlign="left"
               transition="transform 0.2s"
               _hover={{ transform: 'scale(1.02)' }}
+              _focus={{ boxShadow: '0 0 0 3px rgba(43, 140, 238, 0.35)' }}
             >
               {/* Skeleton loader */}
               <Skeleton

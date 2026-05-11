@@ -416,10 +416,12 @@ const A2AResultSummaryScreen: React.FC<A2AResultSummaryProps> = ({
                   <Text fontSize="sm" color="black" fontFamily="mono">
                     {checkId.slice(0, 8)}...{checkId.slice(-4)}
                   </Text>
-                  <Tooltip label={hasCopied ? 'Copied!' : 'Copy full ID'}>
+                  <Tooltip label={hasCopied ? 'Copied!' : 'Copy full ID'} hasArrow>
                     <Box
                       as="button"
+                      type="button"
                       onClick={onCopy}
+                      aria-label={hasCopied ? 'Copied!' : 'Copy full ID'}
                       color="purple.500"
                       _hover={{ color: 'purple.600' }}
                     >

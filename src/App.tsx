@@ -167,6 +167,7 @@ function App() {
             <Route path="/about/philosophy" element={<Philosophy />} />
             <Route path="/Login" element={<LoginPage />} />
             <Route path="/Contact" element={<Contact />} />
+            <Route path="/contact" element={<Contact />} />
             <Route path="/benefits" element={<BenefitsPage />} />
             <Route path='/services/consumers' element={<Consumers />} />
             <Route path='/services/business' element={<Business />} />
