@@ -32,6 +32,7 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
   const isAuthorized =
     status === 'authenticated' && authorizedCheckKey === authCheckKey;
   const bootTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const [onboardingError, setOnboardingError] = useState(false);
 
   // Boot timeout safety net — if isLoading stays true for >8 seconds
   // (e.g., auth status stuck at 'booting'), redirect to login instead
@@ -76,6 +77,7 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
       let shouldSettleLoading = true;
       setIsLoading(true);
       setAuthorizedCheckKey(null);
+      setOnboardingError(false);
 
       try {
         if (status === 'booting') {
@@ -132,7 +134,17 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
         }
 
         console.error("Error checking auth:", error);
-        redirectToLogin();
+
+        // Only redirect to login if the user is genuinely unauthenticated.
+        // If userId is present, the error came from fetchResolvedOnboardingProgress
+        // (network blip, Supabase timeout, DB unavailable) — not from auth.
+        // Redirecting an authenticated user to login in this case is incorrect
+        // and would silently log them out during transient infrastructure issues.
+        if (userId) {
+          setOnboardingError(true);
+        } else {
+          redirectToLogin();
+        }
       } finally {
         if (isCurrentCheck && shouldSettleLoading) {
           setIsLoading(false);
@@ -146,6 +158,22 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
       isCurrentCheck = false;
     };
   }, [authCheckKey, location.hash, location.pathname, location.search, navigate, status, userId]);
+
+  if (onboardingError) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <div className="text-center">
+          <p className="text-gray-600">Something went wrong. Please refresh the page.</p>
+          <button
+            className="mt-4 px-4 py-2 text-sm text-cyan-600 underline"
+            onClick={() => window.location.reload()}
+          >
+            Retry
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   if (isLoading) {
     return (
