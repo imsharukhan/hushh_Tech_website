@@ -11,16 +11,32 @@
  * - Quick links to popular pages
  * - Uses the existing app shell without introducing duplicate navigation chrome
  */
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 export default function NotFound() {
+  useEffect(() => {
+    const previousTitle = document.title;
+    document.title = 'Page Not Found | Hushh Technologies';
+    return () => {
+      document.title = previousTitle;
+    };
+  }, []);
+
   return (
     <div className="min-h-screen flex flex-col bg-white">
       {/* Main content - centered 404 error page */}
-      <main className="flex-grow flex items-center justify-center px-6 py-12">
+      <main
+        id="main-content"
+        aria-label="Error page"
+        className="flex-grow flex items-center justify-center px-6 py-12"
+      >
         <div className="text-center max-w-md">
           {/* Large 404 number */}
-          <h1 className="text-[10rem] leading-none font-black text-gray-100 select-none">
+          <h1
+            aria-hidden="true"
+            className="text-[10rem] leading-none font-black text-gray-100 select-none"
+          >
             404
           </h1>
 
