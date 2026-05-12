@@ -1,5 +1,5 @@
 import { Box, Icon, Tooltip } from '@chakra-ui/react';
-import { motion } from 'framer-motion';
+import { motion, type Transition } from 'framer-motion';
 import { Mail } from 'lucide-react';
 import React from 'react';
 import { useLocation } from 'react-router-dom';
@@ -44,7 +44,7 @@ export default function FloatingContactBubble() {
       <MotionBox
         as="button"
         position="fixed"
-        bottom={{ base: '24px', md: '32px' }}
+        bottom={{ base: 'calc(109px + env(safe-area-inset-bottom))', md: '32px' }}
         right={{ base: '24px', md: '32px' }}
         width={{ base: '56px', md: '56px' }}
         height={{ base: '56px', md: '56px' }}
@@ -89,7 +89,7 @@ export default function FloatingContactBubble() {
         transition={{
           duration: 0.2,
           ease: 'easeInOut',
-        } as any}
+        } as unknown as Transition}
       >
         {/* Mail Icon */}
         <Icon 
