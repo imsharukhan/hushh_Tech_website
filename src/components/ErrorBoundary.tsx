@@ -22,13 +22,14 @@ class ErrorBoundary extends Component<Props, State> {
 
   componentDidCatch(error: Error, errorInfo: ErrorInfo) {
     console.error('ErrorBoundary caught:', error, errorInfo);
+    document.title = 'Something went wrong | Hushh Technologies';
     // TODO: Send to error tracking service (e.g., Sentry, LogRocket)
   }
 
   render() {
     if (this.state.hasError) {
       return this.props.fallback || (
-        <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <div role="alert" className="min-h-screen flex items-center justify-center bg-gray-50">
           <div className="text-center p-8 max-w-md">
             <div className="mb-6">
               <svg
@@ -51,7 +52,7 @@ class ErrorBoundary extends Component<Props, State> {
             <p className="text-gray-600 mb-6">
               We're sorry for the inconvenience. Please refresh the page to continue.
             </p>
-            {this.state.error && process.env.NODE_ENV === 'development' && (
+            {this.state.error && import.meta.env.DEV && (
               <details className="mb-6 text-left bg-gray-100 p-4 rounded-lg">
                 <summary className="cursor-pointer font-semibold text-gray-700 mb-2">
                   Error Details (Development Only)
@@ -64,7 +65,7 @@ class ErrorBoundary extends Component<Props, State> {
             )}
             <button
               onClick={() => window.location.reload()}
-              className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+              className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-300"
             >
               Refresh Page
             </button>
