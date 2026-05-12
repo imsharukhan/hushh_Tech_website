@@ -35,6 +35,57 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ variant = 'light' }
     };
   }, []);
 
+  const triggerRef = useRef<HTMLButtonElement>(null);
+  const listboxRef = useRef<HTMLDivElement>(null);
+  const shouldFocusListbox = useRef(false);
+
+  // Move focus into listbox when opened via keyboard
+  useEffect(() => {
+    if (isOpen && shouldFocusListbox.current && listboxRef.current) {
+      const options = listboxRef.current.querySelectorAll<HTMLButtonElement>('[role="option"]');
+      const selectedIndex = languages.findIndex(l => l.code === i18n.language);
+      options[Math.max(selectedIndex, 0)]?.focus();
+      shouldFocusListbox.current = false;
+    }
+  }, [isOpen, i18n.language]);
+
+  const handleTriggerKeyDown = (e: React.KeyboardEvent<HTMLButtonElement>) => {
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      shouldFocusListbox.current = true;
+      setIsOpen(true);
+    } else if (e.key === 'Escape' && isOpen) {
+      e.preventDefault();
+      setIsOpen(false);
+    }
+  };
+
+  const handleListboxKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    const options = Array.from(
+      e.currentTarget.querySelectorAll<HTMLButtonElement>('[role="option"]')
+    );
+    const currentIndex = options.indexOf(document.activeElement as HTMLButtonElement);
+
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      options[(currentIndex + 1) % options.length]?.focus();
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      if (currentIndex <= 0) {
+        setIsOpen(false);
+        triggerRef.current?.focus();
+      } else {
+        options[currentIndex - 1]?.focus();
+      }
+    } else if (e.key === 'Escape') {
+      e.preventDefault();
+      setIsOpen(false);
+      triggerRef.current?.focus();
+    } else if (e.key === 'Tab') {
+      setIsOpen(false);
+    }
+  };
+
   const changeLanguage = (langCode: string) => {
     i18n.changeLanguage(langCode);
     
@@ -48,6 +99,7 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ variant = 'light' }
     }
     
     setIsOpen(false);
+    triggerRef.current?.focus();
   };
 
   // Dark variant styles (for dark header)
@@ -57,13 +109,18 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ variant = 'light' }
     <div className="relative" ref={dropdownRef}>
       {/* Language Selector Pill */}
       <button
+        ref={triggerRef}
         onClick={() => setIsOpen(!isOpen)}
-        className={`group flex h-9 items-center gap-1 px-3 py-1.5 rounded-full transition-colors ${
+        onKeyDown={handleTriggerKeyDown}
+        aria-label="Select language"
+        aria-expanded={isOpen}
+        aria-haspopup="listbox"
+        aria-controls="language-listbox"
+        className={`group flex h-9 items-center gap-1 px-3 py-1.5 rounded-full transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#135bec] ${
           isDark 
             ? 'bg-gray-800 active:bg-gray-700 border border-gray-700' 
             : 'bg-gray-100 hover:bg-gray-200 border border-transparent dark:bg-gray-800 dark:hover:bg-gray-700 dark:border-gray-700'
         }`}
-        aria-label="Select language"
       >
         <FiGlobe className={`w-3.5 h-3.5 ${isDark ? 'text-gray-400' : 'text-gray-600 dark:text-gray-400'}`} />
         <span className={`text-xs font-semibold ${isDark ? 'text-gray-300' : 'text-gray-700 dark:text-gray-300'}`}>
@@ -74,12 +131,22 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ variant = 'light' }
 
       {/* Dropdown Menu */}
       {isOpen && (
-        <div className="absolute right-0 mt-2 w-40 bg-white rounded-xl shadow-lg border border-gray-100 py-2 z-[200]">
+        <div
+          ref={listboxRef}
+          id="language-listbox"
+          role="listbox"
+          aria-label="Select language"
+          onKeyDown={handleListboxKeyDown}
+          className="absolute right-0 mt-2 w-40 bg-white rounded-xl shadow-lg border border-gray-100 py-2 z-[200]"
+        >
           {languages.map((lang) => {
             const isSelected = i18n.language === lang.code;
             return (
               <button
                 key={lang.code}
+                role="option"
+                aria-selected={isSelected}
+                tabIndex={-1}
                 onClick={() => changeLanguage(lang.code)}
                 className={`w-full flex items-center justify-between px-4 py-2.5 text-left text-sm transition-colors
                   ${isSelected 
