@@ -4,7 +4,7 @@
 
 - Use GitHub issues for bugs and concrete feature requests.
 - Use pull requests for proposed code changes.
-- Read [README.md](/Users/ankitkumarsingh/hushhTech/README.md), [CONTRIBUTING.md](/Users/ankitkumarsingh/hushhTech/CONTRIBUTING.md), and [SECURITY.md](/Users/ankitkumarsingh/hushhTech/SECURITY.md) before opening a new thread.
+- Read [README.md](README.md), [CONTRIBUTING.md](CONTRIBUTING.md), and [SECURITY.md](SECURITY.md) before opening a new thread.
 
 ## Not for public issues
 

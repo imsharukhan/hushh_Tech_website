@@ -154,13 +154,16 @@ describe("PublicInvestorProfilePage", () => {
   });
 
   it("shows full names and verified copy for confirmed public profiles", async () => {
+    const longEmail =
+      "n***h@exceptionally-long-investor-domain-name-for-layout-testing.example";
+
     fetchPublicInvestorProfileBySlugMock.mockResolvedValue({
       slug: "neelesh-meena-4960f9fe",
       profile_url: "https://hushhtech.com/investor/neelesh-meena-4960f9fe",
       is_confirmed: true,
       basic_info: {
         name: "Neelesh Meena",
-        email: "n***h@example.com",
+        email: longEmail,
         age: 32,
         organisation: "Hushh",
       },
@@ -169,6 +172,11 @@ describe("PublicInvestorProfilePage", () => {
           value: "long_term_growth",
           confidence: 0.82,
           rationale: "Matched from profile context",
+        },
+        sector_preferences: {
+          value: ["private-credit-and-ai-infrastructure-allocation-with-a-long-custom-note"],
+          confidence: 0.76,
+          rationale: "Long profile metadata should wrap within the card instead of forcing horizontal overflow.",
         },
       },
       onboarding_data: null,
@@ -183,6 +191,23 @@ describe("PublicInvestorProfilePage", () => {
     expect(container.textContent).toContain("Verified Investor Profile");
     expect(container.textContent).toContain("Verified");
     expect(container.textContent).toContain("Investment Profile");
+
+    const emailValue = container.querySelector(
+      '[data-testid="profile-email-value"]',
+    ) as HTMLElement | null;
+
+    expect(emailValue?.textContent).toBe(longEmail);
+    expect(emailValue?.className).toContain("break-words");
+    expect(emailValue?.style.overflowWrap).toBe("anywhere");
+
+    const metadataValues = container.querySelectorAll('[data-testid="profile-metadata-value"]');
+    const longMetadataValue = Array.from(metadataValues).find((value) =>
+      value.textContent?.includes("private-credit-and-ai-infrastructure")
+    ) as HTMLElement | undefined;
+
+    expect(longMetadataValue).toBeTruthy();
+    expect(longMetadataValue?.className).toContain("break-words");
+    expect(longMetadataValue?.style.overflowWrap).toBe("anywhere");
   });
 
   it("shows basic shared pages for unconfirmed public profiles without verified copy", async () => {

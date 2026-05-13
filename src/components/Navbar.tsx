@@ -9,6 +9,7 @@ import DeleteAccountModal from "./DeleteAccountModal";
 import { useStockQuotes, StockQuote, STOCK_LOGOS } from "../hooks/useStockQuotes";
 import config from "../resources/config/config";
 import { useAuthSession } from "../auth/AuthSessionProvider";
+import { SkipToContentLink } from "./ui/SkipToContentLink";
 
 const WELCOME_TOAST_PENDING_KEY = "showWelcomeToast";
 const WELCOME_TOAST_USER_KEY = "showWelcomeToastUserId";
@@ -209,6 +210,8 @@ export default function Navbar() {
 
   return (
     <>
+      <SkipToContentLink />
+
       {/* Fixed Header with Navigation + Ticker - Light Theme */}
       <header className="fixed w-full z-[999] top-0">
         {/* Main Navigation Bar - Soft Light Background */}
@@ -225,7 +228,7 @@ export default function Navbar() {
             </div>
             {/* Brand Text - Stacked Layout */}
             <div className="flex flex-col">
-              <h1 className="text-[18px] font-bold leading-none tracking-tight text-gray-900">Hushh</h1>
+              <span className="text-[18px] font-bold leading-none tracking-tight text-gray-900">Hushh</span>
               <span className="text-[13px] text-gray-500 font-medium mt-0.5">Technologies</span>
             </div>
           </Link>
@@ -238,6 +241,7 @@ export default function Navbar() {
                 <button
                   key={path}
                   onClick={() => handleLinkClick(path)}
+                  aria-current={active ? "page" : undefined}
                   className={`rounded-full px-4 py-2 text-sm font-semibold transition-colors ${
                     active
                       ? 'bg-[#2F80ED]/10 text-[#1f6cc7]'
@@ -326,7 +330,7 @@ export default function Navbar() {
           {lastUpdated && (
             <div className="absolute right-4 top-1/2 -translate-y-1/2 flex items-center gap-1.5">
               <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span>
-              <span className="text-[9px] font-medium text-gray-500">
+              <span className="text-[9px] font-medium text-gray-700">
                 {lastUpdated.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
               </span>
             </div>
@@ -377,6 +381,7 @@ export default function Navbar() {
                   <button
                     key={path}
                     onClick={() => handleLinkClick(path)}
+                    aria-current={isActive(path) ? "page" : undefined}
                     className="flex items-center w-full min-h-[44px] py-2.5 pr-4 pl-4 active:bg-[#E5E5EA] transition-colors relative"
                   >
                     <div
@@ -408,6 +413,7 @@ export default function Navbar() {
                   <button
                     key={path}
                     onClick={() => handleLinkClick(path)}
+                    aria-current={isActive(path) ? "page" : undefined}
                     className="flex items-center w-full min-h-[44px] py-2.5 pr-4 pl-4 active:bg-[#E5E5EA] transition-colors relative"
                   >
                     <div

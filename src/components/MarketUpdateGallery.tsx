@@ -11,12 +11,11 @@ import {
   ModalOverlay,
   ModalContent,
   ModalBody,
-  ModalCloseButton,
   useDisclosure,
   IconButton,
   Flex
 } from '@chakra-ui/react';
-import { CloseIcon } from '@chakra-ui/icons';
+import { ChevronLeftIcon, ChevronRightIcon, CloseIcon } from '@chakra-ui/icons';
 import { getSupabaseStoragePublicUrl } from '../services/runtime/mainWeb';
 
 interface MarketUpdateGalleryProps {
@@ -37,7 +36,7 @@ const MarketUpdateGallery: React.FC<MarketUpdateGalleryProps> = ({
   const [images, setImages] = useState<{name: string, url: string}[]>([]);
   const [imagesLoaded, setImagesLoaded] = useState<{[key: string]: boolean}>({});
   const [isLoading, setIsLoading] = useState(true);
-  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
   
   // Define the base URL for Supabase storage
@@ -117,10 +116,35 @@ const MarketUpdateGallery: React.FC<MarketUpdateGalleryProps> = ({
     }));
   };
 
-  const handleImageClick = (imageUrl: string) => {
-    setSelectedImage(imageUrl);
+  const getChartLabel = (imageName: string) => imageName.match(/^\d+/)?.[0] || imageName;
+
+  const handleImageClick = (imageIndex: number) => {
+    setSelectedImageIndex(imageIndex);
     onOpen();
   };
+
+  const handlePreviousImage = () => {
+    setSelectedImageIndex(currentIndex => {
+      if (currentIndex === null || images.length === 0) {
+        return currentIndex;
+      }
+
+      return (currentIndex - 1 + images.length) % images.length;
+    });
+  };
+
+  const handleNextImage = () => {
+    setSelectedImageIndex(currentIndex => {
+      if (currentIndex === null || images.length === 0) {
+        return currentIndex;
+      }
+
+      return (currentIndex + 1) % images.length;
+    });
+  };
+
+  const selectedImage = selectedImageIndex === null ? null : images[selectedImageIndex];
+  const hasCarouselControls = images.length > 1 && selectedImageIndex !== null;
 
   // Generate skeleton placeholders
   const renderSkeletons = () => {
@@ -158,8 +182,10 @@ const MarketUpdateGallery: React.FC<MarketUpdateGalleryProps> = ({
           renderSkeletons()
         ) : images.length > 0 ? (
           // Show actual images once loaded
-          images.map((image) => (
+          images.map((image, index) => (
             <Box 
+              as="button"
+              type="button"
               key={image.name} 
               borderRadius="lg" 
               overflow="hidden"
@@ -168,9 +194,12 @@ const MarketUpdateGallery: React.FC<MarketUpdateGalleryProps> = ({
               p={2}
               position="relative"
               cursor="pointer"
-              onClick={() => handleImageClick(image.url)}
+              onClick={() => handleImageClick(index)}
+              aria-label={`Open market analysis chart ${getChartLabel(image.name)}`}
+              textAlign="left"
               transition="transform 0.2s"
               _hover={{ transform: 'scale(1.02)' }}
+              _focus={{ boxShadow: '0 0 0 3px rgba(43, 140, 238, 0.35)' }}
             >
               {/* Skeleton loader */}
               <Skeleton
@@ -183,7 +212,7 @@ const MarketUpdateGallery: React.FC<MarketUpdateGalleryProps> = ({
               >
                 <Image
                   src={image.url}
-                  alt={`Market Analysis Chart ${image.name.match(/^\d+/)?.[0] || ''}`}
+                  alt={`Market Analysis Chart ${getChartLabel(image.name)}`}
                   borderRadius="md"
                   objectFit="contain"
                   w="100%"
@@ -248,10 +277,40 @@ const MarketUpdateGallery: React.FC<MarketUpdateGalleryProps> = ({
                 size="lg"
               />
             </Flex>
+            {hasCarouselControls && (
+              <>
+                <IconButton
+                  aria-label="Show previous market analysis chart"
+                  icon={<ChevronLeftIcon boxSize={8} />}
+                  onClick={handlePreviousImage}
+                  colorScheme="whiteAlpha"
+                  variant="solid"
+                  size="lg"
+                  position="absolute"
+                  left={{ base: 3, md: 6 }}
+                  top="50%"
+                  transform="translateY(-50%)"
+                  zIndex={2}
+                />
+                <IconButton
+                  aria-label="Show next market analysis chart"
+                  icon={<ChevronRightIcon boxSize={8} />}
+                  onClick={handleNextImage}
+                  colorScheme="whiteAlpha"
+                  variant="solid"
+                  size="lg"
+                  position="absolute"
+                  right={{ base: 3, md: 6 }}
+                  top="50%"
+                  transform="translateY(-50%)"
+                  zIndex={2}
+                />
+              </>
+            )}
             {selectedImage && (
               <Image
-                src={selectedImage}
-                alt="Full-screen market analysis chart"
+                src={selectedImage.url}
+                alt={`Full-screen market analysis chart ${getChartLabel(selectedImage.name)}`}
                 maxH="95vh"
                 maxW="95vw"
                 objectFit="contain"

@@ -188,15 +188,14 @@ export default function Leadership() {
               _hover={{ transform: "translateY(-5px)" }}
             >
               <Box 
-                w="150px" 
-                h="150px" 
+                boxSize={{ base: "128px", md: "150px" }}
                 borderRadius="full" 
                 overflow="hidden" 
                 mx="auto" 
                 mb={6}
                 border="3px solid #0891B2"
               >
-                <Image src={img} alt="Manish Sainani" w="full" h="full" objectFit="cover" />
+                <Image src={img} alt="Manish Sainani" boxSize="full" objectFit="cover" display="block" />
               </Box>
               
               <Heading as="h3" fontSize="2xl" mb={2}>
@@ -225,15 +224,14 @@ export default function Leadership() {
               _hover={{ transform: "translateY(-5px)" }}
             >
               <Box 
-                w="150px" 
-                h="150px" 
+                boxSize={{ base: "128px", md: "150px" }}
                 borderRadius="full" 
                 overflow="hidden" 
                 mx="auto" 
                 mb={6}
                 border="3px solid #0891B2"
               >
-                <Image src={img2} alt="Justin Donaldson" w="full" h="full" objectFit="cover" />
+                <Image src={img2} alt="Justin Donaldson" boxSize="full" objectFit="cover" display="block" />
               </Box>
               
               <Heading as="h3" fontSize="2xl" mb={2}>
