@@ -80,11 +80,13 @@ export default function CommunityPage() {
               search
             </span>
             <input
+              id="community-search"
               type="text"
               placeholder="Search articles..."
+              aria-label="Search articles"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full h-12 pl-12 pr-4 rounded-2xl border border-gray-200 bg-white text-[13px] text-black placeholder:text-gray-400 font-light focus:outline-none focus:border-hushh-blue transition-colors"
+              className="w-full h-12 pl-12 pr-4 rounded-2xl border border-gray-200 bg-white text-[13px] text-black placeholder:text-gray-400 font-light focus:outline-none focus:border-hushh-blue focus-visible:ring-2 focus-visible:ring-hushh-blue transition-colors"
             />
           </div>
         </section>
@@ -93,9 +95,11 @@ export default function CommunityPage() {
         <section className="mb-8">
           <div className="relative">
             <select
+              id="community-category"
+              aria-label="Filter by category"
               value={selectedCategory}
               onChange={(e) => onCategoryChange(e.target.value)}
-              className="w-full h-12 px-4 rounded-2xl border border-gray-200 bg-white text-[13px] text-black font-light appearance-none focus:outline-none focus:border-hushh-blue transition-colors cursor-pointer"
+              className="w-full h-12 px-4 rounded-2xl border border-gray-200 bg-white text-[13px] text-black font-light appearance-none focus:outline-none focus:border-hushh-blue focus-visible:ring-2 focus-visible:ring-hushh-blue transition-colors cursor-pointer"
             >
               {dropdownOptions.map((opt) => (
                 <option key={opt} value={opt}>
