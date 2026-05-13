@@ -41,9 +41,15 @@ const NWSScoreBadge = ({ result, loading = false, size = 'md', showBreakdown = f
   if (loading) {
     const dim = size === 'sm' ? 64 : size === 'md' ? 96 : 128;
     return (
-      <div className="flex flex-col items-center gap-2">
-        <div className="rounded-full bg-gray-100 animate-pulse" style={{ width: dim, height: dim }} />
-        <div className="h-3 w-16 bg-gray-100 rounded animate-pulse" />
+      <div
+        className="flex flex-col items-center gap-2"
+        role="status"
+        aria-live="polite"
+        aria-busy="true"
+        aria-label="Loading Network Worth Score"
+      >
+        <div aria-hidden="true" className="rounded-full bg-gray-100 animate-pulse" style={{ width: dim, height: dim }} />
+        <div aria-hidden="true" className="h-3 w-16 bg-gray-100 rounded animate-pulse" />
       </div>
     );
   }

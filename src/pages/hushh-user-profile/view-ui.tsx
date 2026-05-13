@@ -127,8 +127,9 @@ const ViewPreferencesPage: React.FC = () => {
             ].map((chip) => (
               <Box
                 key={chip}
-                h="34px"
+                minH="34px"
                 px={3}
+                py={1.5}
                 borderRadius="999px"
                 border="1px solid #E5E7EB"
                 bg="#F9FAFB"
@@ -137,6 +138,11 @@ const ViewPreferencesPage: React.FC = () => {
                 color="#475569"
                 display="inline-flex"
                 alignItems="center"
+                maxW="100%"
+                minW={0}
+                whiteSpace="normal"
+                overflowWrap="anywhere"
+                wordBreak="break-word"
               >
                 {chip}
               </Box>

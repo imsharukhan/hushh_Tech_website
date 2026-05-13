@@ -401,27 +401,27 @@ const PublicInvestorProfilePage: React.FC = () => {
             {activeTab === 'home' && (
               <>
                 {/* Wallet Buttons - Top */}
-                <section className="pt-6 pb-2">
-                  <div className="flex items-center justify-center gap-4">
+                <section className="pt-4 sm:pt-6 pb-2">
+                  <div className="flex flex-col min-[380px]:flex-row items-stretch min-[380px]:items-center justify-center gap-3 min-[380px]:gap-4">
                     <button
                       onClick={handleAppleWalletPass}
                       disabled={isApplePassLoading || !appleWalletSupported}
-                      className="flex items-center gap-2.5 px-6 py-3 bg-[#F5F5F5] rounded-full hover:bg-gray-200 active:scale-[0.97] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="flex min-w-0 items-center justify-center gap-2.5 px-4 py-3 min-[380px]:px-6 bg-[#F5F5F5] rounded-full hover:bg-gray-200 active:scale-[0.97] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                       aria-label="Add to Apple Wallet"
                     >
-                      <FaApple className="w-5 h-5 text-black" />
-                      <span className="text-sm font-medium text-black">
+                      <FaApple className="w-5 h-5 shrink-0 text-black" />
+                      <span className="text-sm font-medium text-black whitespace-nowrap">
                         {isApplePassLoading ? "Loading..." : "Apple Wallet"}
                       </span>
                     </button>
                     <button
                       onClick={handleGoogleWalletPass}
                       disabled={isGooglePassLoading || !googleWalletSupported}
-                      className="flex items-center gap-2.5 px-6 py-3 bg-[#F5F5F5] rounded-full hover:bg-gray-200 active:scale-[0.97] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="flex min-w-0 items-center justify-center gap-2.5 px-4 py-3 min-[380px]:px-6 bg-[#F5F5F5] rounded-full hover:bg-gray-200 active:scale-[0.97] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                       aria-label="Add to Google Wallet"
                     >
-                      <FaGoogle className="w-4 h-4" style={{ color: '#4285F4' }} />
-                      <span className="text-sm font-medium text-black">
+                      <FaGoogle className="w-4 h-4 shrink-0" style={{ color: '#4285F4' }} />
+                      <span className="text-sm font-medium text-black whitespace-nowrap">
                         {isGooglePassLoading ? "Loading..." : "Google Wallet"}
                       </span>
                     </button>
@@ -447,9 +447,9 @@ const PublicInvestorProfilePage: React.FC = () => {
 
                 {/* Welcome Section */}
                 <section className="py-8">
-                  <h3 className="text-[10px] tracking-[0.2em] text-gray-400 uppercase mb-4 font-medium">
+                  <p className="text-[10px] tracking-[0.2em] text-gray-400 uppercase mb-4 font-medium">
                     {profileEyebrow}
-                  </h3>
+                  </p>
                   <h1
                     className="text-[2.75rem] leading-[1.1] font-normal text-black tracking-tight font-serif"
                     style={{ fontFamily: "'Playfair Display', serif" }}
@@ -479,8 +479,14 @@ const PublicInvestorProfilePage: React.FC = () => {
                     <div className="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center">
                       <span className="material-symbols-outlined text-gray-600 text-xl" style={{ fontVariationSettings: "'wght' 400" }}>mail</span>
                     </div>
-                      <div>
-                        <p className="text-sm font-semibold text-gray-900">{basicInfo.email || 'Contact hidden'}</p>
+                      <div className="min-w-0 flex-1">
+                        <p
+                          className="text-sm font-semibold text-gray-900 whitespace-normal break-words"
+                          style={{ overflowWrap: "anywhere" }}
+                          data-testid="profile-email-value"
+                        >
+                          {basicInfo.email || 'Contact hidden'}
+                        </p>
                         <p className="text-xs text-gray-500 font-medium">Contact masked for privacy</p>
                       </div>
                     </div>
@@ -500,12 +506,12 @@ const PublicInvestorProfilePage: React.FC = () => {
                 {/* Share Section */}
                 <section className="mb-8">
                   <div className="flex items-center justify-between mb-6">
-                    <h3
+                    <h2
                       className="text-xl text-black font-normal font-serif"
                       style={{ fontFamily: "'Playfair Display', serif" }}
                     >
                       Share Profile
-                    </h3>
+                    </h2>
                     <button
                       onClick={handleOpenProfile}
                       className="p-2 hover:bg-gray-100 rounded-full transition-colors"
@@ -551,12 +557,12 @@ const PublicInvestorProfilePage: React.FC = () => {
                 {visibleInvestorProfileEntries.length > 0 && (
                   <section className="mb-8">
                     <div className="flex items-center justify-between mb-6">
-                      <h3
+                      <h2
                         className="text-xl text-black font-normal font-serif"
                         style={{ fontFamily: "'Playfair Display', serif" }}
                       >
                         Investment Profile
-                      </h3>
+                      </h2>
                       <span className="px-2.5 py-1 bg-hushh-blue/10 text-hushh-blue text-[10px] font-semibold rounded-full uppercase tracking-wide">
                         AI Analyzed
                       </span>
@@ -571,19 +577,31 @@ const PublicInvestorProfilePage: React.FC = () => {
                         const isExpanded = expandedFields.has(fieldName);
 
                         return (
-                          <div key={fieldName} className="py-4 border-b border-gray-200">
+                          <div
+                            key={fieldName}
+                            className="py-4 border-b border-gray-200"
+                            data-testid="profile-metadata-row"
+                          >
                             <button
                               onClick={() => toggleField(fieldName)}
-                              className="w-full flex items-center gap-4 text-left"
+                              className="w-full flex items-start gap-3 text-left sm:items-center sm:gap-4"
                             >
                               <div className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center shrink-0">
                                 {getFieldIcon(fieldName)}
                               </div>
                               <div className="flex-1 min-w-0">
-                                <p className="text-sm font-semibold text-gray-900 mb-0.5">{label}</p>
-                                <p className="text-xs text-gray-500 font-medium">{valueText}</p>
+                                <p className="text-sm font-semibold text-gray-900 mb-0.5 whitespace-normal break-words">
+                                  {label}
+                                </p>
+                                <p
+                                  className="text-xs text-gray-500 font-medium leading-relaxed whitespace-normal break-words"
+                                  style={{ overflowWrap: "anywhere" }}
+                                  data-testid="profile-metadata-value"
+                                >
+                                  {valueText}
+                                </p>
                               </div>
-                              <div className="flex items-center gap-2 shrink-0">
+                              <div className="flex items-center gap-2 shrink-0 self-start sm:self-center">
                                 <span
                                   className="text-[10px] font-semibold px-2 py-0.5 rounded-full"
                                   style={{ backgroundColor: `${confColor}15`, color: confColor }}
@@ -598,8 +616,11 @@ const PublicInvestorProfilePage: React.FC = () => {
                               </div>
                             </button>
                             {isExpanded && fieldData.rationale && (
-                              <div className="mt-3 ml-14 pl-0">
-                                <p className="text-xs text-gray-500 italic mb-2">
+                              <div className="mt-3 ml-0 sm:ml-14">
+                                <p
+                                  className="text-xs text-gray-500 italic mb-2 leading-relaxed whitespace-normal break-words"
+                                  style={{ overflowWrap: "anywhere" }}
+                                >
                                   {fieldData.rationale}
                                 </p>
                                 <div className="h-0.5 bg-gray-200 rounded-full overflow-hidden">
@@ -624,7 +645,7 @@ const PublicInvestorProfilePage: React.FC = () => {
                       <div className="flex items-center gap-3">
                         <Search className="w-6 h-6 text-purple-400" />
                         <div>
-                          <h3 className="text-lg font-semibold text-white">Deep Profile Intelligence</h3>
+                          <h2 className="text-lg font-semibold text-white">Deep Profile Intelligence</h2>
                           <p className="text-xs text-slate-400">Powered by Shadow Investigator AI</p>
                         </div>
                       </div>
@@ -765,12 +786,12 @@ const PublicInvestorProfilePage: React.FC = () => {
                 {/* Personal Information */}
                 {visibleOnboardingFields.length > 0 && (
                   <section className="mb-8">
-                    <h3
+                    <h2
                       className="text-xl text-black font-normal font-serif mb-6"
                       style={{ fontFamily: "'Playfair Display', serif" }}
                     >
                       Personal Information
-                    </h3>
+                    </h2>
                     <div className="space-y-0">
                       {visibleOnboardingFields.map((field) => (
                         <div
@@ -787,12 +808,12 @@ const PublicInvestorProfilePage: React.FC = () => {
 
                 {/* CTA to create own profile */}
                 <section className="mb-8 space-y-3">
-                  <h3
+                  <h2
                     className="text-xl text-black font-normal font-serif mb-2"
                     style={{ fontFamily: "'Playfair Display', serif" }}
                   >
                     Create Your Profile
-                  </h3>
+                  </h2>
                   <p className="text-xs text-gray-500 font-medium mb-4">
                     Get your AI-powered investor profile in minutes
                   </p>

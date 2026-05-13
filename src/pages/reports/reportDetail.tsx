@@ -4,13 +4,13 @@ import {
   Container,
   Box,
   Text,
-  Spinner,
   useToast,
   Alert,
   AlertIcon,
   AlertTitle,
   AlertDescription,
 } from '@chakra-ui/react';
+import LoadingSpinner from '../../components/LoadingSpinner';
 import ReportDetail from '../../components/ReportDetail';
 import { getReportById, Report } from '../../services/reportService';
 
@@ -60,7 +60,7 @@ const ReportDetailPage: React.FC = () => {
     if (loading) {
       return (
         <Box textAlign="center" py={8}>
-          <Spinner size="xl" />
+          <LoadingSpinner size="lg" label="Loading report" />
         </Box>
       );
     }
