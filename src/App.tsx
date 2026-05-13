@@ -112,7 +112,7 @@ const ContentWrapper = ({ children }: { children: ReactNode }) => {
   const isMetrics = location.pathname === '/metrics' || location.pathname === '/metric';
 
   return (
-    <div className={`${isHomePage || isAuthCallback || isUserRegistration || isOnboarding || isKycFlow || isKycDemo || isA2APlayground || isInvestorGuide || isHushhAI || isKai || isStudio || isHushhUserProfile || isSignNda || isDocumentViewer || isInvestorProfile || isPublicInvestorProfile || isDiscoverFundA || isCommunity || isDeleteAccount || isLogin || isSignup || isProfile || isHushhHackathon || isMetrics ? '' : 'mt-20'}`}>
+    <div id="main-content" className={`${isHomePage || isAuthCallback || isUserRegistration || isOnboarding || isKycFlow || isKycDemo || isA2APlayground || isInvestorGuide || isHushhAI || isKai || isStudio || isHushhUserProfile || isSignNda || isDocumentViewer || isInvestorProfile || isPublicInvestorProfile || isDiscoverFundA || isCommunity || isDeleteAccount || isLogin || isSignup || isProfile || isHushhHackathon || isMetrics ? '' : 'mt-20'}`}>
       {children}
     </div>
   );
@@ -159,6 +159,7 @@ function App() {
     
     return (
       <div className="min-h-screen flex flex-col">
+        <a href="#main-content" className="skip-link">Skip to main content</a>
         {showNavbar && <Navbar />}
         <ContentWrapper>
           <Routes>
