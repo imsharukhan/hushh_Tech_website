@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Container,
   Box,
@@ -44,9 +44,13 @@ const BenefitsPage: React.FC = () => {
   const sectionSpacing = useBreakpointValue({ base: "12", sm: "16", md: "24" });
   const headingSize = useBreakpointValue({ base: "2xl", sm: "3xl", md: "4xl" });
   const iconSize = useBreakpointValue({ base: "2xl", md: "3xl" });
-  
+
+  useEffect(() => {
+    document.title = "Benefits — Hushh Technologies";
+  }, []);
+
   return (
-    <Container maxW="100%" bg={'white'} py={10} px={{ base: 4, md: 8 }}>
+    <Container as="main" aria-label="Benefits" maxW="100%" bg={'white'} py={10} px={{ base: 4, md: 8 }}>
       {/* Main Header */}
       <Box textAlign="center" mb={{ base: 8, md: 12 }} minH={{ base: "40vh", md: "60vh" }} display={'flex'} flexDirection={'column'} justifyContent={'center'}>
         <Heading 
