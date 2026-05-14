@@ -109,6 +109,13 @@ const CareerList = () => {
                     borderColor: "gray.300",
                     textDecoration: "none"
                   }}
+                  _focusVisible={{
+                    outline: "2px solid",
+                    outlineColor: "blue.400",
+                    outlineOffset: "2px",
+                    boxShadow: "md",
+                    borderColor: "gray.300",
+                  }}
                   transition="all 0.2s"
                   className="job-card"
                 >
