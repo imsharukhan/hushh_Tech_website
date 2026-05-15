@@ -53,7 +53,7 @@ const validateEmail = (email: string) => {
   return re.test(String(email).toLowerCase());
 };
 
-const InvestorProfilePage: React.FC<NDARequestModalProps> = ({
+const NDARequestModalComponent: React.FC<NDARequestModalProps> = ({
   session,
   onSubmit,
   isOpen,
@@ -596,4 +596,4 @@ const InvestorProfilePage: React.FC<NDARequestModalProps> = ({
   );
 };
 
-export default InvestorProfilePage;
+export default NDARequestModalComponent;

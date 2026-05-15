@@ -32,6 +32,10 @@ Spoke skills:
 
 1. `quality-contracts`
 
+### `repo-operations`
+
+1. `github-ops-report`
+
 ### `frontend`
 
 1. `frontend-design-system`
@@ -56,10 +60,11 @@ This is the first implemented workflow pack. It classifies incoming pull request
 1. Start with `repo-context` when the affected surface is not yet clear.
 2. Start with `oss-contribution-triage` when the task is, "A contributor opened a PR. What should we do?"
 3. Use [`repo-operations`](./repo-operations/SKILL.md) to determine whether checks ran, what failed, and whether the pipeline can be trusted.
-4. Use [`quality-contracts`](./quality-contracts/SKILL.md) to determine the smallest authoritative proof.
-5. Use [`security-audit`](./security-audit/SKILL.md) when auth, env, secrets, or sensitive API behavior make maintainer patching risky.
-6. Use [`frontend`](./frontend/SKILL.md), [`frontend-design-system`](./frontend-design-system/SKILL.md), [`backend`](./backend/SKILL.md), or [`backend-api-contracts`](./backend-api-contracts/SKILL.md) when a PR is directionally correct and needs a bounded maintainer patch.
-7. If a PR spans multiple owner surfaces, start with [`repo-context`](./repo-context/SKILL.md) and let the highest-risk surface win.
+4. Use [`github-ops-report`](./github-ops-report/SKILL.md) when operations needs a GitHub contribution PDF, missed-weekday red-alert sheet, or named-contributor activity comparison.
+5. Use [`quality-contracts`](./quality-contracts/SKILL.md) to determine the smallest authoritative proof.
+6. Use [`security-audit`](./security-audit/SKILL.md) when auth, env, secrets, or sensitive API behavior make maintainer patching risky.
+7. Use [`frontend`](./frontend/SKILL.md), [`frontend-design-system`](./frontend-design-system/SKILL.md), [`backend`](./backend/SKILL.md), or [`backend-api-contracts`](./backend-api-contracts/SKILL.md) when a PR is directionally correct and needs a bounded maintainer patch.
+8. If a PR spans multiple owner surfaces, start with [`repo-context`](./repo-context/SKILL.md) and let the highest-risk surface win.
 
 If doing this manually without the skill system, read:
 

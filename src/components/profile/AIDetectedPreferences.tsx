@@ -131,6 +131,9 @@ const preferenceCategories: Record<string, string[]> = {
   'Beliefs': ['spiritualBeliefs'],
 };
 
+const toCategoryId = (category: string) =>
+  category.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+
 const AIDetectedPreferences: React.FC<AIDetectedPreferencesProps> = ({ userId, onSave }) => {
   const [enrichedProfile, setEnrichedProfile] = useState<EnrichedProfile | null>(null);
   const [loading, setLoading] = useState(true);
@@ -334,7 +337,11 @@ const AIDetectedPreferences: React.FC<AIDetectedPreferencesProps> = ({ userId, o
   ).length;
 
   return (
-    <section className="bg-white rounded-2xl border border-gray-200 p-5 shadow-sm">
+    <section
+      className="bg-white rounded-2xl border border-gray-200 p-5 shadow-sm"
+      aria-labelledby="ai-detected-preferences-title"
+      aria-describedby="ai-detected-preferences-description"
+    >
       {/* Header */}
       <div className="flex items-center justify-between mb-5">
         <div className="flex items-center gap-3">
@@ -342,7 +349,12 @@ const AIDetectedPreferences: React.FC<AIDetectedPreferencesProps> = ({ userId, o
             <Sparkles className="w-5 h-5 text-white" />
           </div>
           <div>
-            <h3 className="text-lg font-semibold text-gray-900">AI-Detected Preferences</h3>
+            <h3
+              id="ai-detected-preferences-title"
+              className="text-lg font-semibold text-gray-900"
+            >
+              AI-Detected Preferences
+            </h3>
             <p className="text-xs text-gray-500">{totalPreferences} preferences detected</p>
           </div>
         </div>
@@ -350,7 +362,10 @@ const AIDetectedPreferences: React.FC<AIDetectedPreferencesProps> = ({ userId, o
       </div>
 
       {/* Description */}
-      <p className="text-sm text-gray-600 mb-4 px-1">
+      <p
+        id="ai-detected-preferences-description"
+        className="text-sm text-gray-600 mb-4 px-1"
+      >
         These preferences were detected using AI-powered web intelligence. 
         You can edit any field before saving to your profile.
       </p>
@@ -362,15 +377,23 @@ const AIDetectedPreferences: React.FC<AIDetectedPreferencesProps> = ({ userId, o
           if (categoryPrefs.length === 0) return null;
 
           const isExpanded = expandedCategories.has(category);
+          const categoryId = toCategoryId(category);
+          const triggerId = `ai-preferences-${categoryId}-trigger`;
+          const panelId = `ai-preferences-${categoryId}-panel`;
 
           return (
-            <div 
+            <section
               key={category}
               className="border border-gray-100 rounded-xl overflow-hidden"
+              aria-labelledby={triggerId}
             >
               {/* Category Header */}
               <button
+                id={triggerId}
+                type="button"
                 onClick={() => toggleCategory(category)}
+                aria-expanded={isExpanded}
+                aria-controls={panelId}
                 className="w-full flex items-center justify-between p-3 bg-gray-50 hover:bg-gray-100 transition-colors"
               >
                 <div className="flex items-center gap-2">
@@ -386,7 +409,10 @@ const AIDetectedPreferences: React.FC<AIDetectedPreferencesProps> = ({ userId, o
 
               {/* Category Content */}
               {isExpanded && (
-                <div className="p-3 space-y-2 bg-white">
+                <div
+                  id={panelId}
+                  className="p-3 space-y-2 bg-white"
+                >
                   {categoryPrefs.map(([fieldName, value]) => {
                     const label = (PREFERENCE_FIELD_LABELS as Record<string, string>)[fieldName] || fieldName;
                     const icon = categoryIcons[fieldName] || <Heart className="w-4 h-4" />;
@@ -456,7 +482,7 @@ const AIDetectedPreferences: React.FC<AIDetectedPreferencesProps> = ({ userId, o
                   })}
                 </div>
               )}
-            </div>
+            </section>
           );
         })}
       </div>

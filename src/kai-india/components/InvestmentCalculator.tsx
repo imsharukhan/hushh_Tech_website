@@ -108,7 +108,7 @@ export const InvestmentCalculator: React.FC = () => {
                         }`}>
                             {p.label}
                         </span>
-                        <span className={`text-[9px] uppercase tracking-wider font-medium mt-0.5 transition-colors duration-300 hidden xs:block ${
+                        <span className={`text-[9px] uppercase tracking-wider font-medium mt-0.5 transition-colors duration-300 hidden sm:block ${
                             profile === p.id ? 'text-neutral-500' : 'text-neutral-500/70'
                         }`}>
                             {p.sub}

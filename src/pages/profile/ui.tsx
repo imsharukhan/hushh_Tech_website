@@ -52,7 +52,10 @@ const ProfilePage: React.FC = () => {
           </div>
 
           {/* action buttons */}
-          <div className="w-full max-w-[440px] space-y-3 mt-2">
+          <div
+            className="w-full max-w-[440px] grid gap-3 mt-2 sm:grid-cols-2 sm:items-stretch"
+            data-testid="profile-cta-group"
+          >
             <HushhTechCta
               onClick={primaryCTA.action}
               variant={HushhTechCtaVariant.BLACK}
