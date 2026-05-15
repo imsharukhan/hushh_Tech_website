@@ -1,11 +1,13 @@
 // src/components/MobileBottomNav.tsx
 // Mobile bottom navigation with 4 tabs matching the exact design reference
 // Active tab has blue circular background behind icon
+// Issue #1219: Fixed overlay issues and added entrance animation
 
 import React from 'react';
 import { Box, Flex, Text, Icon } from '@chakra-ui/react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { FiHome, FiTrendingUp, FiUsers, FiUser } from 'react-icons/fi';
+import { motion } from 'framer-motion';
 
 interface NavItem {
   id: string;
@@ -58,6 +60,43 @@ const hiddenOnPages = [
   '/hushh-user-profile', // Hide nav on profile page for better UX (like onboarding)
 ];
 
+// Framer Motion variants for entrance animation
+const navVariants = {
+  hidden: {
+    y: 20,
+    opacity: 0,
+  },
+  visible: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      type: 'spring',
+      stiffness: 300,
+      damping: 30,
+      staggerChildren: 0.05,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: {
+    y: 10,
+    opacity: 0,
+  },
+  visible: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      type: 'spring',
+      stiffness: 300,
+      damping: 30,
+    },
+  },
+};
+
+// Motion component for the nav container
+const MotionBox = motion(Box);
+
 const MobileBottomNav: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -75,8 +114,8 @@ const MobileBottomNav: React.FC = () => {
     return null;
   }
 
-  // Check if a nav item is active
-  const isActive = (item: NavItem): boolean => {
+  // Check if a nav item is active - uses location.pathname for immediate sync
+  const checkIsActive = (item: NavItem): boolean => {
     if (location.pathname === item.path) return true;
     if (item.matchPaths?.some(p => location.pathname.startsWith(p))) return true;
     // Special case for community - match any /community path
@@ -85,28 +124,49 @@ const MobileBottomNav: React.FC = () => {
   };
 
   return (
-    <Box
+    <MotionBox
+      as="nav"
+      role="navigation"
+      aria-label="Mobile bottom navigation"
       display={{ base: 'block', md: 'none' }}
       position="fixed"
       bottom="0"
       left="0"
       right="0"
-      zIndex="40"
+      zIndex="1000"
       bg="#F8F9FA"
       borderTop="1px solid"
       borderColor="#E5E7EB"
-      pb="env(safe-area-inset-bottom)"
+      // Safe area inset for iOS devices with home indicator
+      sx={{
+        pb: 'env(safe-area-inset-bottom, 0px)',
+      }}
+      // Ensure nav doesn't block content - use pointer-events properly
+      css={{
+        // Prevent the nav background from extending beyond its bounds
+        clipPath: 'inset(0 0 0 0)',
+      }}
+      // Entrance animation variants
+      variants={navVariants}
+      initial="hidden"
+      animate="visible"
+      // Re-animate on route change for smooth transitions
+      key={location.pathname}
     >
       <Flex
         justify="space-around"
         align="center"
-        h="85px"
+        h={{ base: '70px', sm: '85px' }}
         maxW="448px"
         mx="auto"
         px="2"
+        // Ensure consistent height on all viewports
+        css={{
+          minHeight: '70px',
+        }}
       >
         {navItems.map((item) => {
-          const active = isActive(item);
+          const active = checkIsActive(item);
           return (
             <Flex
               key={item.id}
@@ -121,7 +181,11 @@ const MobileBottomNav: React.FC = () => {
               onClick={() => navigate(item.path)}
               transition="all 0.2s ease"
               role="group"
+              aria-current={active ? 'page' : undefined}
               _active={{ transform: 'scale(0.95)' }}
+              // Framer Motion item variants for staggered entrance
+              as={motion.div}
+              variants={itemVariants}
             >
               {/* Icon Container - Blue circle when active */}
               <Flex
@@ -157,7 +221,7 @@ const MobileBottomNav: React.FC = () => {
           );
         })}
       </Flex>
-    </Box>
+    </MotionBox>
   );
 };
 

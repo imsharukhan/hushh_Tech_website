@@ -1,4 +1,5 @@
 import lineGraph from '../../files/lineGraph.svg';
+import { FaLinkedin } from "react-icons/fa";
 
 export default function Philosophy() {
   return (
@@ -120,8 +121,14 @@ export default function Philosophy() {
           Whether you're an individual or an institution, Hushh 🤫 Technologies LLC invites you to join us on our journey.
         </p>
         <div className="flex justify-center">
-          <a  href="https://www.linkedin.com/in/manishsainani/"  target="_blank"
-  rel="noopener noreferrer" className="text-red-600 hover:text-red-700 flex items-center">
+          <a
+            href="https://www.linkedin.com/in/manishsainani/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Open Manish Sainani's LinkedIn profile"
+            className="text-red-600 hover:text-red-700 flex items-center"
+          >
+            <FaLinkedin aria-hidden="true" focusable="false" className="h-6 w-6" />
           </a>
         </div>
       </section>

@@ -42,9 +42,11 @@ export const MarketCard: React.FC<MarketCardProps> = ({ title, items = [], isLoa
           </div>
         ) : (
           items.map((item, idx) => (
-            <div 
-              key={idx} 
-              className="group flex justify-between items-center cursor-pointer py-3 border-b border-neutral-800 last:border-0 hover:bg-neutral-800/50 rounded-lg px-2 -mx-2 transition-colors duration-300"
+            <button
+              key={idx}
+              type="button"
+              disabled={!onSelect}
+              className="group flex w-full justify-between items-center text-left cursor-pointer disabled:cursor-default py-3 border-b border-neutral-800 last:border-0 hover:bg-neutral-800/50 disabled:hover:bg-transparent focus-visible:outline focus-visible:outline-2 focus-visible:outline-neutral-500 focus-visible:outline-offset-2 rounded-lg px-2 -mx-2 transition-colors duration-300"
               onClick={() => onSelect && onSelect(item.name)}
             >
               <div className="flex flex-col pr-4 overflow-hidden flex-1 min-w-0">
@@ -61,7 +63,7 @@ export const MarketCard: React.FC<MarketCardProps> = ({ title, items = [], isLoa
                   {item.change}
                 </div>
               </div>
-            </div>
+            </button>
           ))
         )}
       </div>

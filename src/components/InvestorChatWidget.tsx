@@ -279,7 +279,7 @@ export function InvestorChatWidget({ slug, investorName }: { slug: string; inves
               <h1 className="text-xl font-bold text-slate-900 leading-tight">Hushh Assistant</h1>
             </div>
             <button
-              className="flex items-center justify-center w-10 h-10 rounded-full text-slate-600 hover:bg-slate-100 transition-colors"
+              className="flex items-center justify-center w-10 h-10 rounded-full text-slate-600 hover:bg-slate-100 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-hushh-blue focus-visible:ring-offset-2"
               aria-label="Open chat settings"
             >
               <Settings className="w-5 h-5" />
@@ -425,7 +425,7 @@ export function InvestorChatWidget({ slug, investorName }: { slug: string; inves
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={handleKeyPress}
-                className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3.5 text-base text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#2B8CEE] focus:ring-1 focus:ring-[#2B8CEE] transition-all resize-none overflow-hidden"
+                className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3.5 text-base text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-hushh-blue focus:ring-1 focus:ring-hushh-blue transition-all resize-none overflow-hidden"
                 placeholder="Type a message..."
                 rows={1}
                 style={{ minHeight: '52px', maxHeight: '120px' }}
@@ -437,7 +437,7 @@ export function InvestorChatWidget({ slug, investorName }: { slug: string; inves
             <button
               onClick={sendMessage}
               disabled={loading || !input.trim()}
-              className="flex items-center justify-center shrink-0 w-[52px] h-[52px] bg-[#2B8CEE] text-white rounded-xl hover:bg-blue-600 active:scale-95 transition-all shadow-md shadow-blue-500/20 disabled:opacity-50 disabled:cursor-not-allowed disabled:active:scale-100"
+              className="flex items-center justify-center shrink-0 w-[52px] h-[52px] bg-[#2B8CEE] text-white rounded-xl hover:bg-blue-600 active:scale-95 transition-all shadow-md shadow-blue-500/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-hushh-blue focus-visible:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed disabled:active:scale-100"
               aria-label="Send message"
             >
               <ArrowUp className="w-6 h-6" />

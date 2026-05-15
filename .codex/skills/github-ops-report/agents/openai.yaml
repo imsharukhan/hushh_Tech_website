@@ -1,0 +1,4 @@
+interface:
+  display_name: "GitHub Ops Report"
+  short_description: "Build code-only GitHub operations PDFs"
+  default_prompt: "Use $github-ops-report to generate a weekend-aware Hushh Labs GitHub code contribution PDF for named contributors."

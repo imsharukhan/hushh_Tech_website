@@ -13,17 +13,14 @@ const VARIANT_CLASSES: Record<ButtonVariant, string> = {
   primary: [
     "bg-black text-white border border-black",
     "shadow-lg hover:shadow-xl hover:bg-black/90",
-    "active:scale-[0.98] transition-all",
   ].join(" "),
   secondary: [
     "bg-white text-black border border-black",
     "hover:bg-gray-50",
-    "active:scale-[0.98] transition-colors",
   ].join(" "),
   ghost: [
     "bg-transparent text-black border border-transparent",
     "hover:bg-gray-100",
-    "active:scale-[0.98] transition-colors",
   ].join(" "),
 };
 
@@ -37,8 +34,12 @@ const SIZE_CLASSES: Record<ButtonSize, string> = {
 const BASE_CLASSES = [
   "inline-flex items-center justify-center gap-2",
   "font-semibold tracking-wide",
+  "cursor-pointer",
+  "transition-all duration-200 ease-out",
+  "hover:-translate-y-px active:translate-y-0 active:scale-[0.98]",
   "disabled:opacity-50 disabled:cursor-not-allowed",
-  "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black",
+  "disabled:hover:translate-y-0 disabled:active:scale-100",
+  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2",
 ].join(" ");
 
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
