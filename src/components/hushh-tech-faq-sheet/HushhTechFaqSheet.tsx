@@ -214,9 +214,11 @@ const HushhTechFaqSheet: React.FC<HushhTechFaqSheetProps> = ({
                     <div key={key}>
                       {/* Question row */}
                       <button
+                        id={`faq-btn-${key}`}
                         onClick={() => handleToggle(key)}
-                        className="w-full flex items-center gap-3 px-4 py-4 text-left hover:bg-gray-50 transition-colors"
+                        className="w-full flex items-center gap-3 px-4 py-4 text-left hover:bg-gray-50 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-hushh-blue"
                         aria-expanded={isExpanded}
+                        aria-controls={`faq-panel-${key}`}
                       >
                         <div className="w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center shrink-0">
                           <span
@@ -241,6 +243,10 @@ const HushhTechFaqSheet: React.FC<HushhTechFaqSheetProps> = ({
 
                       {/* Answer — animated */}
                       <div
+                        id={`faq-panel-${key}`}
+                        role="region"
+                        aria-labelledby={`faq-btn-${key}`}
+                        aria-hidden={!isExpanded}
                         className={`overflow-hidden transition-all duration-200 ease-out ${
                           isExpanded ? "max-h-60 opacity-100" : "max-h-0 opacity-0"
                         }`}
