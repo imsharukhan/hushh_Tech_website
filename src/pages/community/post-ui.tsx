@@ -24,8 +24,16 @@ export default function CommunityPostPage() {
   /* loading state */
   if (loading) {
     return (
-      <div className="bg-white min-h-screen flex items-center justify-center">
-        <div className="w-8 h-8 border-2 border-gray-200 border-t-hushh-blue rounded-full animate-spin" />
+      <div
+        className="bg-white min-h-screen flex items-center justify-center"
+        role="status"
+        aria-live="polite"
+      >
+        <div
+          className="w-8 h-8 border-2 border-gray-200 border-t-hushh-blue rounded-full animate-spin"
+          aria-hidden="true"
+        />
+        <span className="sr-only">Loading community article</span>
       </div>
     );
   }
