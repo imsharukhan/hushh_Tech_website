@@ -216,7 +216,7 @@ const HushhTechFaqSheet: React.FC<HushhTechFaqSheetProps> = ({
                       <button
                         id={`faq-btn-${key}`}
                         onClick={() => handleToggle(key)}
-                        className="w-full flex items-center gap-3 px-4 py-4 text-left hover:bg-gray-50 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-hushh-blue"
+                        className="w-full flex items-center gap-3 px-4 py-4 text-left hover:bg-gray-50 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
                         aria-expanded={isExpanded}
                         aria-controls={`faq-panel-${key}`}
                       >
