@@ -24,6 +24,10 @@ Definitions:
 
 1. `quality-contracts`
 
+### `repo-operations`
+
+1. `github-ops-report`
+
 ### `frontend`
 
 1. `frontend-design-system`

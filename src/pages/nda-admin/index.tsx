@@ -320,11 +320,14 @@ const styles: { [key: string]: React.CSSProperties } = {
   },
   tableWrapper: {
     overflowX: 'auto',
+    WebkitOverflowScrolling: 'touch',
+    width: '100%',
     maxWidth: '1200px',
     margin: '0 auto',
   },
   table: {
     width: '100%',
+    minWidth: '860px',
     borderCollapse: 'collapse',
     border: '1px solid black',
   },

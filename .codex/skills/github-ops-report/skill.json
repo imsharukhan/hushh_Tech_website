@@ -1,0 +1,56 @@
+{
+  "id": "github-ops-report",
+  "role": "spoke",
+  "owner_family": "repo-operations",
+  "primary_scope": "github-ops-report-intake",
+  "description": "Use when generating Hushh Labs GitHub operations reports, code-only contributor activity PDFs, weekend-aware missed-weekday red-alert sheets, or fair contribution and impact comparisons for named GitHub users across Hushh org repositories.",
+  "owned_paths": [
+    ".codex/skills/github-ops-report"
+  ],
+  "non_owned_paths": [
+    "repo-context",
+    "repo-operations",
+    "oss-contribution-triage",
+    "quality-contracts"
+  ],
+  "task_types": [
+    "operations-reporting",
+    "contributor-activity-reporting"
+  ],
+  "required_reads": [
+    ".codex/skills/github-ops-report/SKILL.md"
+  ],
+  "required_commands": [
+    "python3 -m py_compile .codex/skills/github-ops-report/scripts/github_ops_report.py",
+    "python3 .codex/skills/github-ops-report/scripts/github_ops_report.py --help"
+  ],
+  "verification_bundles": [
+    {
+      "id": "github-ops-report",
+      "commands": [
+        "python3 -m py_compile .codex/skills/github-ops-report/scripts/github_ops_report.py",
+        "python3 .codex/skills/github-ops-report/scripts/github_ops_report.py --help"
+      ],
+      "tests": [
+        "python3 -m py_compile .codex/skills/github-ops-report/scripts/github_ops_report.py",
+        "python3 .codex/skills/github-ops-report/scripts/github_ops_report.py --help"
+      ]
+    }
+  ],
+  "handoff_targets": [
+    "repo-operations",
+    "quality-contracts",
+    "oss-contribution-triage"
+  ],
+  "adjacent_skills": [
+    "repo-operations",
+    "quality-contracts",
+    "oss-contribution-triage"
+  ],
+  "risk_tags": [
+    "activity-misread-risk",
+    "line-count-overweight-risk",
+    "github-only-signal-risk",
+    "issue-only-overcount-risk"
+  ]
+}

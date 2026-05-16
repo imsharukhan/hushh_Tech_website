@@ -155,6 +155,9 @@ describe("WalletCardPreviewModal", () => {
       onAddToAppleWallet: () => undefined,
     });
 
+    expect(
+      document.body.querySelector('button[aria-label="Close wallet preview"]')
+    ).not.toBeNull();
     expect(document.body.textContent).toContain("Hushh Gold Pass");
     expect(document.body.textContent).toContain(
       "A polished gold preview of your Hushh investor membership card."

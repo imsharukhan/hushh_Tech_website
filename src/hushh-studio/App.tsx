@@ -143,34 +143,38 @@ const HushhStudioApp: React.FC = () => {
         <div className="mt-8 space-y-6">
           {/* Image Upload for Image-to-Video mode */}
           {mode === 'image-to-video' && (
-            <div
-              onClick={() => fileInputRef.current?.click()}
-              className="relative aspect-video rounded-2xl border-2 border-dashed border-white/20 bg-white/5 flex flex-col items-center justify-center cursor-pointer hover:border-purple-500/50 hover:bg-purple-500/5 transition-all overflow-hidden group"
-            >
-              {selectedImage ? (
-                <>
-                  <img
-                    src={`data:image/jpeg;base64,${selectedImage}`}
-                    alt="Selected"
-                    className="absolute inset-0 w-full h-full object-cover"
-                  />
-                  <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                    <p className="text-white font-medium">Click to change image</p>
-                  </div>
-                </>
-              ) : (
-                <>
-                  <div className="w-16 h-16 rounded-full bg-gradient-to-br from-purple-500/20 to-pink-500/20 flex items-center justify-center mb-4">
-                    <svg className="w-8 h-8 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                    </svg>
-                  </div>
-                  <p className="text-gray-400 text-center">
-                    <span className="text-purple-400 font-medium">Click to upload</span> or drag an image here
-                  </p>
-                  <p className="text-gray-500 text-sm mt-2">Supports JPG, PNG, WebP</p>
-                </>
-              )}
+            <>
+              <button
+                type="button"
+                aria-label={selectedImage ? "Change source image" : "Upload source image"}
+                onClick={() => fileInputRef.current?.click()}
+                className="relative aspect-video w-full rounded-2xl border-2 border-dashed border-white/20 bg-white/5 flex flex-col items-center justify-center cursor-pointer hover:border-purple-500/50 hover:bg-purple-500/5 transition-all overflow-hidden group text-left"
+              >
+                {selectedImage ? (
+                  <>
+                    <img
+                      src={`data:image/jpeg;base64,${selectedImage}`}
+                      alt="Selected"
+                      className="absolute inset-0 w-full h-full object-cover"
+                    />
+                    <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                      <p className="text-white font-medium">Click to change image</p>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <div className="w-16 h-16 rounded-full bg-gradient-to-br from-purple-500/20 to-pink-500/20 flex items-center justify-center mb-4">
+                      <svg className="w-8 h-8 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                      </svg>
+                    </div>
+                    <p className="text-gray-400 text-center">
+                      <span className="text-purple-400 font-medium">Click to upload</span> or drag an image here
+                    </p>
+                    <p className="text-gray-500 text-sm mt-2">Supports JPG, PNG, WebP</p>
+                  </>
+                )}
+              </button>
               <input
                 ref={fileInputRef}
                 type="file"
@@ -178,7 +182,7 @@ const HushhStudioApp: React.FC = () => {
                 className="hidden"
                 onChange={handleImageSelect}
               />
-            </div>
+            </>
           )}
 
           {/* Video Preview (for extend mode or showing result) */}

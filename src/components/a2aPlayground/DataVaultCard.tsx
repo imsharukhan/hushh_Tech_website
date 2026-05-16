@@ -170,16 +170,32 @@ const FieldCard: React.FC<{ field: DataField }> = ({ field }) => {
 
         <VStack align="stretch" spacing={2}>
           {/* Header with label and status */}
-          <HStack justify="space-between">
+          <HStack
+            align="flex-start"
+            data-testid="data-vault-field-card-header"
+            flexWrap="wrap"
+            gap={2}
+            justify="space-between"
+          >
             <Text
               fontSize="xs"
               color="gray.400"
               textTransform="uppercase"
               letterSpacing="wider"
+              flex="1 1 8rem"
+              lineHeight="1.2"
+              minW={0}
+              wordBreak="break-word"
             >
               {field.label}
             </Text>
-            <HStack spacing={1}>
+            <HStack
+              alignSelf={{ base: 'flex-start', sm: 'center' }}
+              data-testid="data-vault-action-badge"
+              flex="0 0 auto"
+              ml={{ base: 0, sm: 'auto' }}
+              spacing={1}
+            >
               <motion.div
                 animate={field.status === 'unlocking' ? { rotate: [0, 10, -10, 0] } : {}}
                 transition={{ duration: 0.5, repeat: field.status === 'unlocking' ? Infinity : 0 }}
@@ -193,7 +209,13 @@ const FieldCard: React.FC<{ field: DataField }> = ({ field }) => {
                   field.status === 'protected' ? 'blue' :
                   field.status === 'unlocking' ? 'yellow' : 'red'
                 }
+                lineHeight="1.1"
+                maxW={{ base: '8rem', sm: 'none' }}
+                px={2}
+                py={1}
+                textAlign="center"
                 variant="subtle"
+                whiteSpace="normal"
               >
                 {config.label}
               </Badge>
@@ -201,11 +223,13 @@ const FieldCard: React.FC<{ field: DataField }> = ({ field }) => {
           </HStack>
 
           {/* Value display */}
-          <HStack justify="space-between">
+          <HStack align="center" justify="space-between" spacing={2}>
             <Text
               fontSize="sm"
               fontFamily="mono"
               color={field.status === 'locked' ? 'gray.500' : 'white'}
+              minW={0}
+              overflowWrap="anywhere"
               style={{
                 filter: field.status === 'locked' ? 'blur(4px)' : 'none',
               }}

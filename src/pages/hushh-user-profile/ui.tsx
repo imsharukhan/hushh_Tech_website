@@ -13,6 +13,7 @@ import HushhTechBackHeader from "../../components/hushh-tech-back-header/HushhTe
 import HushhTechCta, { HushhTechCtaVariant } from "../../components/hushh-tech-cta/HushhTechCta";
 import HushhTechFooter, { HushhFooterTab } from "../../components/hushh-tech-footer/HushhTechFooter";
 import NWSScoreBadge from "../../components/profile/NWSScoreBadge";
+import { PrivacyShield } from "../../components/profile/PrivacyShield";
 import WalletCardPreviewModal from "../../components/wallet/WalletCardPreviewModal";
 
 /* ── Playfair heading style ── */
@@ -274,19 +275,43 @@ const HushhUserProfilePage: React.FC = () => {
             <FieldRow label="Full Name">
               <input type="text" value={form.name} onChange={(e) => handleChange("name", e.target.value)} className={inlineInput} placeholder="Your Name" />
             </FieldRow>
-            <FieldRow label="Email Address">
-              <input type="email" value={form.email} onChange={(e) => handleChange("email", e.target.value)} className={inlineInput} placeholder="you@email.com" />
-            </FieldRow>
-            <FieldRow label="Phone">
-              <div className="flex items-center gap-1 min-w-0">
-                <select value={form.phoneCountryCode} onChange={(e) => handleChange("phoneCountryCode", e.target.value)} className="appearance-none bg-transparent border-none focus:ring-0 p-0 text-sm font-medium text-black text-right shrink-0">
-                  <option value="+1">+1</option>
-                  <option value="+44">+44</option>
-                  <option value="+91">+91</option>
-                </select>
-                <input type="tel" value={form.phoneNumber} onChange={(e) => handleChange("phoneNumber", e.target.value)} className={inlineInput} placeholder="98765 43210" />
-              </div>
-            </FieldRow>
+            <PrivacyShield
+              email={form.email}
+              phone={`${form.phoneCountryCode} ${form.phoneNumber}`.trim()}
+              className="my-4"
+              emailControl={
+                <input
+                  type="email"
+                  aria-label="Email address"
+                  value={form.email}
+                  onChange={(e) => handleChange("email", e.target.value)}
+                  className={inlineInput}
+                  placeholder="you@email.com"
+                />
+              }
+              phoneControl={
+                <div className="flex items-center gap-1 min-w-0">
+                  <select
+                    aria-label="Phone country code"
+                    value={form.phoneCountryCode}
+                    onChange={(e) => handleChange("phoneCountryCode", e.target.value)}
+                    className="appearance-none bg-transparent border-none focus:ring-0 p-0 text-sm font-medium text-black text-right shrink-0"
+                  >
+                    <option value="+1">+1</option>
+                    <option value="+44">+44</option>
+                    <option value="+91">+91</option>
+                  </select>
+                  <input
+                    type="tel"
+                    aria-label="Phone number"
+                    value={form.phoneNumber}
+                    onChange={(e) => handleChange("phoneNumber", e.target.value)}
+                    className={inlineInput}
+                    placeholder="98765 43210"
+                  />
+                </div>
+              }
+            />
             <FieldRow label="Age">
               <input type="number" value={form.age} onChange={(e) => handleChange("age", e.target.value)} className={inlineInput} placeholder="34" />
             </FieldRow>

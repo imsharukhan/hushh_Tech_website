@@ -1,316 +1,270 @@
 import React from "react";
-import {
-  Container,
-  Box,
-  Heading,
-  Text,
-  SimpleGrid,
-  Button,
-  VStack,
-  HStack,
-  Flex,
-  Icon,
-  useBreakpointValue,
-} from "@chakra-ui/react";
-import {
-  DollarSign,
-  Heart,
-  LifeBuoy,
-  Gift,
-  Clock,
-  Zap,
-  Briefcase,
-  CreditCard,
-  Award,
-  Coffee,
-  Users,
-  BookOpen,
-  Target,
-  Monitor,
-  Star,
-  Headphones,
-  Home,
-  MapPin,
-  Calendar,
-  Smile,
-  Check,
-} from "lucide-react";
-import "./benefits.css";
+import { Check } from "lucide-react";
+
+/** Matches `src/pages/home/ui.tsx` hero `h1` */
+const playfair = { fontFamily: "'Playfair Display', serif" };
+const featureRowClassName = "flex items-start gap-3.5";
+const featureIconClassName = "mt-[3px] h-5 w-5 shrink-0 text-hushh-blue";
 
 const BenefitsPage: React.FC = () => {
-  // Use responsive values based on breakpoint
-  const sectionMargin = useBreakpointValue({ base: "0", sm: "4", md: "10", lg: "20" });
-  const sectionPadding = useBreakpointValue({ base: "6", sm: "8", md: "10" });
-  const sectionSpacing = useBreakpointValue({ base: "12", sm: "16", md: "24" });
-  const headingSize = useBreakpointValue({ base: "2xl", sm: "3xl", md: "4xl" });
-  const iconSize = useBreakpointValue({ base: "2xl", md: "3xl" });
-  
   return (
-    <Container maxW="100%" bg={'white'} py={10} px={{ base: 4, md: 8 }}>
-      {/* Main Header */}
-      <Box textAlign="center" mb={{ base: 8, md: 12 }} minH={{ base: "40vh", md: "60vh" }} display={'flex'} flexDirection={'column'} justifyContent={'center'}>
-        <Heading 
-          as="h1" 
-          size={{ base: "xl", md: "3xl" }} 
-          mb={4}
-          bgGradient="linear(to-r, #111111, #111111, #54E5FF)"
-          bgClip="text"
-          lineHeight={{ base: "1.2", md: "1.4" }}
-          px={{ base: 2, md: 0 }}
-        >
-          {/* <Text as="span" color="black">Hushh Technologies LLC – </Text> */}
-          <Text as="span" className="blue-gradient-text" fontWeight="500">World-Class Benefits</Text><br/>
-          <Text as="span" color="black" fontWeight="300"> for World-Class Talent</Text>
-        </Heading>
-        
-        <Text fontSize={{ base: "md", md: "lg" }} maxW="4xl" mx="auto" color="gray.600">
-          We believe that exceptional people deserve exceptional benefits. Our comprehensive package is
-          designed to support your professional growth, personal wellbeing, and financial future.
-        </Text>
-      </Box>
+    <div
+      data-page="benefits"
+      className="bg-white antialiased text-gray-900 selection:bg-hushh-blue selection:text-white"
+    >
+      <main className="mx-auto w-full max-w-7xl px-4 pt-4 pb-12 sm:px-6 lg:px-8">
+        {/* Hero — compact; same copy as before */}
+        <header className="mx-auto max-w-3xl py-6 text-center sm:py-8 md:py-10">
+          <h1
+            className="mb-3 text-[2.75rem] font-normal leading-[1.1] tracking-tight text-black font-serif sm:text-[3.25rem] lg:text-[4rem]"
+            style={playfair}
+          >
+            World-Class Benefits <br /> for World-Class{" "}
+            <span className="text-gray-400 italic font-light">Talent</span>
+          </h1>
+          <p className="mx-auto max-w-3xl text-sm font-light leading-relaxed text-gray-500 sm:text-base">
+            We believe that exceptional people deserve exceptional benefits. Our comprehensive package is
+            designed to support your professional growth, personal wellbeing, and financial future.
+          </p>
+        </header>
 
-      {/* Benefits Sections */}
-      <VStack spacing={sectionSpacing} align="stretch" mb={20} sx={{
-        "--tw-bg-opacity": "1",
-        backgroundColor: "rgb(250 250 250 / var(--tw-bg-opacity,1))"
-      }}>
-        
-        {/* Compensation & Investment Opportunities */}
-        <Box bg={'white'} mx={{ base: 0, sm: 4, md: 10, lg: 20 }} p={sectionPadding} borderRadius={'lg'} shadow={{ base: "sm", md: "md" }}>
-          <Flex 
-            align="center" 
-            justify="center" 
-            mb={{ base: 6, md: 8 }}
-            flexDirection={{ base: "column", sm: "row" }}
-            textAlign={{ base: "center", sm: "left" }}
-          >
-            <Box as="span" fontSize={iconSize} color="#F6B353" mr={{ base: 0, sm: 3 }} mb={{ base: 2, sm: 0 }}>💰</Box>
-            <Heading as="h2" fontSize={headingSize} color="rgb(29,29,31)" fontWeight="300">
-              Compensation & Investment Opportunities
-            </Heading>
-          </Flex>
-          
-          <SimpleGrid color="hsl(29 29 31)" fontFamily={'-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, sans-serif'} columns={{ base: 1, md: 2 }} spacing={{ base: 4, md: 10 }} maxW="container.lg" mx="auto" fontWeight="300">
-            <HStack align="flex-start" spacing={3}>
-              <Icon as={Check} boxSize={5} mt={1} flexShrink={0} />
-              <Text fontSize={{ base: "md", md: "lg" }}>Competitive base salaries benchmarked to top-tier firms</Text>
-            </HStack>
-            
-            <HStack align="flex-start" spacing={3}>
-              <Icon as={Check} boxSize={5} mt={1} flexShrink={0} />
-              <Text fontSize={{ base: "md", md: "lg" }} color="#1D1D1F">Access to proprietary investment strategies</Text>
-            </HStack>
-            
-            <HStack align="flex-start" spacing={3}>
-              <Icon as={Check} boxSize={5} mt={1} flexShrink={0} />
-              <Text fontSize={{ base: "md", md: "lg" }} color="gray.700">Performance-based bonuses tied to individual and company success</Text>
-            </HStack>
-            
-            <HStack align="flex-start" spacing={3}>
-              <Icon as={Check} boxSize={5} mt={1} flexShrink={0} />
-              <Text fontSize={{ base: "md", md: "lg" }} color="gray.700">401(k) with generous company matching</Text>
-            </HStack>
-            
-            <HStack align="flex-start" spacing={3}>
-              <Icon as={Check} boxSize={5} mt={1} flexShrink={0} />
-              <Text fontSize={{ base: "md", md: "lg" }} color="gray.700">Equity participation in company growth</Text>
-            </HStack>
-            
-            <HStack align="flex-start" spacing={3}>
-              <Icon as={Check} boxSize={5} mt={1} flexShrink={0} />
-              <Text fontSize={{ base: "md", md: "lg" }} color="gray.700">Financial planning and investment advisory services</Text>
-            </HStack>
-          </SimpleGrid>
-        </Box>
-        
-        {/* Health, Wellness & Family Support */}
-        <Box bg={'white'} mx={{ base: 0, sm: 4, md: 10, lg: 20 }} p={sectionPadding} borderRadius={'lg'} shadow={{ base: "sm", md: "md" }}>
-          <Flex 
-            align="center" 
-            justify="center" 
-            mb={{ base: 6, md: 8 }}
-            flexDirection={{ base: "column", sm: "row" }}
-            textAlign={{ base: "center", sm: "left" }}
-          >
-            <Box as="span" fontSize={iconSize} color="#C084FC" mr={{ base: 0, sm: 3 }} mb={{ base: 2, sm: 0 }}>🏥</Box>
-            <Heading as="h2" fontSize={headingSize} color="rgb(29,29,31)" fontWeight="300">
-              Health, Wellness & Family Support
-            </Heading>
-          </Flex>
-          
-          <SimpleGrid columns={{ base: 1, md: 2 }} color="hsl(29 29 31)" fontFamily={'-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, sans-serif'} spacing={{ base: 4, md: 10 }} maxW="container.lg" mx="auto" fontWeight="300">
-            <HStack align="flex-start" spacing={3}>
-              <Icon as={Check} boxSize={5} mt={1} flexShrink={0} />
-              <Text fontSize={{ base: "md", md: "lg" }} color="gray.700">Premium health, dental, and vision insurance (100% company paid)</Text>
-            </HStack>
-            
-            <HStack align="flex-start" spacing={3}>
-              <Icon as={Check} boxSize={5} mt={1} flexShrink={0} />
-              <Text fontSize={{ base: "md", md: "lg" }} color="gray.700">Generous parental leave policies</Text>
-            </HStack>
-            
-            <HStack align="flex-start" spacing={3}>
-              <Icon as={Check} boxSize={5} mt={1} flexShrink={0} />
-              <Text fontSize={{ base: "md", md: "lg" }} color="gray.700">Mental health and wellness programs</Text>
-            </HStack>
-            
-            <HStack align="flex-start" spacing={3}>
-              <Icon as={Check} boxSize={5} mt={1} flexShrink={0} />
-              <Text fontSize={{ base: "md", md: "lg" }} color="gray.700">Childcare assistance and family support services</Text>
-            </HStack>
-            
-            <HStack align="flex-start" spacing={3}>
-              <Icon as={Check} boxSize={5} mt={1} flexShrink={0} />
-              <Text fontSize={{ base: "md", md: "lg" }} color="gray.700">On-site fitness facilities and wellness stipend</Text>
-            </HStack>
-            
-            <HStack align="flex-start" spacing={3}>
-              <Icon as={Check} boxSize={5} mt={1} flexShrink={0} />
-              <Text fontSize={{ base: "md", md: "lg" }} color="gray.700">Comprehensive life and disability insurance</Text>
-            </HStack>
-          </SimpleGrid>
-        </Box>
-        
-        {/* Work-Life, Growth & Giving Back */}
-        <Box bg={'white'} mx={{ base: 0, sm: 4, md: 10, lg: 20 }} p={sectionPadding} borderRadius={'lg'} shadow={{ base: "sm", md: "md" }}>
-          <Flex 
-            align="center" 
-            justify="center" 
-            mb={{ base: 6, md: 8 }}
-            flexDirection={{ base: "column", sm: "row" }}
-            textAlign={{ base: "center", sm: "left" }}
-          >
-            <Box as="span" fontSize={iconSize} color="#6CB288" mr={{ base: 0, sm: 3 }} mb={{ base: 2, sm: 0 }}>🌱</Box>
-            <Heading as="h2" fontSize={headingSize} color="rgb(29,29,31)" fontWeight="300" textAlign={{ base: "center", sm: "left" }}>
-              Work-Life, Growth & Giving Back
-            </Heading>
-          </Flex>
-          
-          <SimpleGrid color="hsl(29 29 31)" fontFamily={'-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, sans-serif'} columns={{ base: 1, md: 2 }} spacing={{ base: 4, md: 10 }} maxW="container.lg" mx="auto" fontWeight="300">
-            <HStack align="flex-start" spacing={3}>
-              <Icon as={Check} boxSize={5} mt={1} flexShrink={0} />
-              <Text fontSize={{ base: "md", md: "lg" }} color="gray.700">Flexible work arrangements and remote work options</Text>
-            </HStack>
-            
-            <HStack align="flex-start" spacing={3}>
-              <Icon as={Check} boxSize={5} mt={1} flexShrink={0} />
-              <Text fontSize={{ base: "md", md: "lg" }} color="gray.700">Conference attendance and continuing education support</Text>
-            </HStack>
-            
-            <HStack align="flex-start" spacing={3}>
-              <Icon as={Check} boxSize={5} mt={1} flexShrink={0} />
-              <Text fontSize={{ base: "md", md: "lg" }} color="gray.700">Unlimited PTO policy with minimum usage requirements</Text>
-            </HStack>
-            
-            <HStack align="flex-start" spacing={3}>
-              <Icon as={Check} boxSize={5} mt={1} flexShrink={0} />
-              <Text fontSize={{ base: "md", md: "lg" }} color="gray.700">Internal mentorship and leadership development programs</Text>
-            </HStack>
-            
-            <HStack align="flex-start" spacing={3}>
-              <Icon as={Check} boxSize={5} mt={1} flexShrink={0} />
-              <Text fontSize={{ base: "md", md: "lg" }} color="gray.700">Sabbatical opportunities for long-term employees</Text>
-            </HStack>
-            
-            <HStack align="flex-start" spacing={3}>
-              <Icon as={Check} boxSize={5} mt={1} flexShrink={0} />
-              <Text fontSize={{ base: "md", md: "lg" }} color="gray.700">Charitable giving matching program</Text>
-            </HStack>
-            
-            <HStack align="flex-start" spacing={3}>
-              <Icon as={Check} boxSize={5} mt={1} flexShrink={0} />
-              <Text fontSize={{ base: "md", md: "lg" }} color="gray.700">Professional development budget ($10,000+ annually)</Text>
-            </HStack>
-            
-            <HStack align="flex-start" spacing={3}>
-              <Icon as={Check} boxSize={5} mt={1} flexShrink={0} />
-              <Text fontSize={{ base: "md", md: "lg" }} color="gray.700">Volunteer time off for community service</Text>
-            </HStack>
-          </SimpleGrid>
-        </Box>
-        
-        {/* Perks, Culture & Quality of Life */}
-        <Box bg={'white'} mx={{ base: 0, sm: 4, md: 10, lg: 20 }} p={sectionPadding} borderRadius={'lg'} shadow={{ base: "sm", md: "md" }}>
-          <Flex 
-            align="center" 
-            justify="center" 
-            mb={{ base: 6, md: 8 }}
-            flexDirection={{ base: "column", sm: "row" }}
-            textAlign={{ base: "center", sm: "left" }}
-          >
-            <Box as="span" fontSize={iconSize} color="#FC8181" mr={{ base: 0, sm: 3 }} mb={{ base: 2, sm: 0 }}>🎯</Box>
-            <Heading as="h2" fontSize={headingSize} color="rgb(29,29,31)" fontWeight="300">
-              Perks, Culture & Quality of Life
-            </Heading>
-          </Flex>
-          
-          <SimpleGrid color="hsl(29 29 31)" fontFamily={'-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, sans-serif'} columns={{ base: 1, md: 2 }} spacing={{ base: 4, md: 10 }} maxW="container.lg" mx="auto" fontWeight="300">
-            <HStack align="flex-start" spacing={3}>
-              <Icon as={Check} boxSize={5} mt={1} flexShrink={0} />
-              <Text fontSize={{ base: "md", md: "lg" }} color="gray.700">State-of-the-art office spaces with premium amenities</Text>
-            </HStack>
-            
-            <HStack align="flex-start" spacing={3}>
-              <Icon as={Check} boxSize={5} mt={1} flexShrink={0} />
-              <Text fontSize={{ base: "md", md: "lg" }} color="gray.700">Team events, retreats, and cultural activities</Text>
-            </HStack>
-            
-            <HStack align="flex-start" spacing={3}>
-              <Icon as={Check} boxSize={5} mt={1} flexShrink={0} />
-              <Text fontSize={{ base: "md", md: "lg" }} color="gray.700">Catered meals and premium coffee/snacks</Text>
-            </HStack>
-            
-            <HStack align="flex-start" spacing={3}>
-              <Icon as={Check} boxSize={5} mt={1} flexShrink={0} />
-              <Text fontSize={{ base: "md", md: "lg" }} color="gray.700">Innovation time for personal projects</Text>
-            </HStack>
-          </SimpleGrid>
-        </Box>
-      </VStack>
-      
-      {/* Why Join Hushh Technologies? */}
-      <Box
-        bg="white"
-        borderRadius="lg"
-        p={{ base: 6, md: 12 }}
-        color="white"
-        textAlign="center"
-        maxW="container.lg"
-        mx="auto"
-        my={{ base: 10, md: 20 }}
-        shadow={{ base: "sm", md: "md" }}
-      >
-        <Heading as="h2" fontSize={{ base: "xl", md: "4xl" }} color="hsl(29 29 31)" mb={{ base: 4, md: 6 }} fontWeight="400">
-          Why Join Hushh Technologies?
-        </Heading>
-        
-        <Text fontSize={{ base: "md", md: "xl" }} fontWeight="300" mb={{ base: 6, md: 10 }} lineHeight="tall" maxW="4xl" mx="auto" color={'#6E6E73'}>
-          At Hushh Technologies, you'll be part of a team that's revolutionizing the investment industry 
-          through cutting-edge AI and quantitative methods. You'll work alongside brilliant minds, solve 
-          complex challenges, and directly impact the future of finance while enjoying unparalleled benefits 
-          and growth opportunities.
-        </Text>
-        
-        <Button
-          as="a"
-          href="/career"
-          bg={'linear-gradient(to right, #00A9E0, #6DD3EF)'}
-          color="white"
-          size={{ base: "md", md: "lg" }}
-          px={{ base: 4, md: 6 }}
-          py={{ base: 3, md: 4 }}
-          fontWeight="300"
-          borderRadius="full"
-          _hover={{ bg: "#0098cc", transform: "translateY(-2px)" }}
-          boxShadow="md"
-          transition="all 0.3s ease"
-          height="auto"
-          width={{ base: "100%", sm: "auto" }}
-        >
-          View Open Positions
-        </Button>
-      </Box>
-    </Container>
+        <div className="flex flex-col gap-5 sm:gap-6 lg:gap-8">
+          {/* Compensation & Investment Opportunities */}
+          <section className="rounded-2xl border border-gray-200/60 bg-ios-gray-bg p-5 transition-colors hover:border-hushh-blue/30 sm:p-6">
+            <div className="mb-4 flex flex-col items-center gap-2 text-center sm:mb-5 sm:flex-row sm:items-center sm:justify-center sm:gap-3 sm:text-left">
+              <span className="text-2xl sm:text-3xl" aria-hidden>
+                💰
+              </span>
+              <h2
+                className="text-2xl font-medium tracking-tight text-black sm:text-3xl"
+                style={playfair}
+              >
+                Compensation & Investment Opportunities
+              </h2>
+            </div>
+            <ul className="grid grid-cols-1 gap-x-6 gap-y-2 md:grid-cols-2 md:gap-y-3">
+              <li className={featureRowClassName}>
+                <Check className={featureIconClassName} aria-hidden />
+                <p className="text-sm font-light leading-relaxed text-gray-500 sm:text-base">
+                  Competitive base salaries benchmarked to top-tier firms
+                </p>
+              </li>
+              <li className={featureRowClassName}>
+                <Check className={featureIconClassName} aria-hidden />
+                <p className="text-sm font-light leading-relaxed text-gray-500 sm:text-base">
+                  Access to proprietary investment strategies
+                </p>
+              </li>
+              <li className={featureRowClassName}>
+                <Check className={featureIconClassName} aria-hidden />
+                <p className="text-sm font-light leading-relaxed text-gray-500 sm:text-base">
+                  Performance-based bonuses tied to individual and company success
+                </p>
+              </li>
+              <li className={featureRowClassName}>
+                <Check className={featureIconClassName} aria-hidden />
+                <p className="text-sm font-light leading-relaxed text-gray-500 sm:text-base">
+                  401(k) with generous company matching
+                </p>
+              </li>
+              <li className={featureRowClassName}>
+                <Check className={featureIconClassName} aria-hidden />
+                <p className="text-sm font-light leading-relaxed text-gray-500 sm:text-base">
+                  Equity participation in company growth
+                </p>
+              </li>
+              <li className={featureRowClassName}>
+                <Check className={featureIconClassName} aria-hidden />
+                <p className="text-sm font-light leading-relaxed text-gray-500 sm:text-base">
+                  Financial planning and investment advisory services
+                </p>
+              </li>
+            </ul>
+          </section>
+
+          {/* Health, Wellness & Family Support */}
+          <section className="rounded-2xl border border-gray-200/60 bg-ios-gray-bg p-5 transition-colors hover:border-hushh-blue/30 sm:p-6">
+            <div className="mb-4 flex flex-col items-center gap-2 text-center sm:mb-5 sm:flex-row sm:items-center sm:justify-center sm:gap-3 sm:text-left">
+              <span className="text-2xl sm:text-3xl" aria-hidden>
+                🏥
+              </span>
+              <h2
+                className="text-2xl font-medium tracking-tight text-black sm:text-3xl"
+                style={playfair}
+              >
+                Health, Wellness & Family Support
+              </h2>
+            </div>
+            <ul className="grid grid-cols-1 gap-x-6 gap-y-2 md:grid-cols-2 md:gap-y-3">
+              <li className={featureRowClassName}>
+                <Check className={featureIconClassName} aria-hidden />
+                <p className="text-sm font-light leading-relaxed text-gray-500 sm:text-base">
+                  Premium health, dental, and vision insurance (100% company paid)
+                </p>
+              </li>
+              <li className={featureRowClassName}>
+                <Check className={featureIconClassName} aria-hidden />
+                <p className="text-sm font-light leading-relaxed text-gray-500 sm:text-base">
+                  Generous parental leave policies
+                </p>
+              </li>
+              <li className={featureRowClassName}>
+                <Check className={featureIconClassName} aria-hidden />
+                <p className="text-sm font-light leading-relaxed text-gray-500 sm:text-base">
+                  Mental health and wellness programs
+                </p>
+              </li>
+              <li className={featureRowClassName}>
+                <Check className={featureIconClassName} aria-hidden />
+                <p className="text-sm font-light leading-relaxed text-gray-500 sm:text-base">
+                  Childcare assistance and family support services
+                </p>
+              </li>
+              <li className={featureRowClassName}>
+                <Check className={featureIconClassName} aria-hidden />
+                <p className="text-sm font-light leading-relaxed text-gray-500 sm:text-base">
+                  On-site fitness facilities and wellness stipend
+                </p>
+              </li>
+              <li className={featureRowClassName}>
+                <Check className={featureIconClassName} aria-hidden />
+                <p className="text-sm font-light leading-relaxed text-gray-500 sm:text-base">
+                  Comprehensive life and disability insurance
+                </p>
+              </li>
+            </ul>
+          </section>
+
+          {/* Work-Life, Growth & Giving Back */}
+          <section className="rounded-2xl border border-gray-200/60 bg-ios-gray-bg p-5 transition-colors hover:border-hushh-blue/30 sm:p-6">
+            <div className="mb-4 flex flex-col items-center gap-2 text-center sm:mb-5 sm:flex-row sm:items-center sm:justify-center sm:gap-3 sm:text-left">
+              <span className="text-2xl sm:text-3xl" aria-hidden>
+                🌱
+              </span>
+              <h2
+                className="text-2xl font-medium tracking-tight text-black sm:text-3xl"
+                style={playfair}
+              >
+                Work-Life, Growth & Giving Back
+              </h2>
+            </div>
+            <ul className="grid grid-cols-1 gap-x-6 gap-y-2 md:grid-cols-2 md:gap-y-3">
+              <li className={featureRowClassName}>
+                <Check className={featureIconClassName} aria-hidden />
+                <p className="text-sm font-light leading-relaxed text-gray-500 sm:text-base">
+                  Flexible work arrangements and remote work options
+                </p>
+              </li>
+              <li className={featureRowClassName}>
+                <Check className={featureIconClassName} aria-hidden />
+                <p className="text-sm font-light leading-relaxed text-gray-500 sm:text-base">
+                  Conference attendance and continuing education support
+                </p>
+              </li>
+              <li className={featureRowClassName}>
+                <Check className={featureIconClassName} aria-hidden />
+                <p className="text-sm font-light leading-relaxed text-gray-500 sm:text-base">
+                  Unlimited PTO policy with minimum usage requirements
+                </p>
+              </li>
+              <li className={featureRowClassName}>
+                <Check className={featureIconClassName} aria-hidden />
+                <p className="text-sm font-light leading-relaxed text-gray-500 sm:text-base">
+                  Internal mentorship and leadership development programs
+                </p>
+              </li>
+              <li className={featureRowClassName}>
+                <Check className={featureIconClassName} aria-hidden />
+                <p className="text-sm font-light leading-relaxed text-gray-500 sm:text-base">
+                  Sabbatical opportunities for long-term employees
+                </p>
+              </li>
+              <li className={featureRowClassName}>
+                <Check className={featureIconClassName} aria-hidden />
+                <p className="text-sm font-light leading-relaxed text-gray-500 sm:text-base">
+                  Charitable giving matching program
+                </p>
+              </li>
+              <li className={featureRowClassName}>
+                <Check className={featureIconClassName} aria-hidden />
+                <p className="text-sm font-light leading-relaxed text-gray-500 sm:text-base">
+                  Professional development budget ($10,000+ annually)
+                </p>
+              </li>
+              <li className={featureRowClassName}>
+                <Check className={featureIconClassName} aria-hidden />
+                <p className="text-sm font-light leading-relaxed text-gray-500 sm:text-base">
+                  Volunteer time off for community service
+                </p>
+              </li>
+            </ul>
+          </section>
+
+          {/* Perks, Culture & Quality of Life */}
+          <section className="rounded-2xl border border-gray-200/60 bg-ios-gray-bg p-5 transition-colors hover:border-hushh-blue/30 sm:p-6">
+            <div className="mb-4 flex flex-col items-center gap-2 text-center sm:mb-5 sm:flex-row sm:items-center sm:justify-center sm:gap-3 sm:text-left">
+              <span className="text-2xl sm:text-3xl" aria-hidden>
+                🎯
+              </span>
+              <h2
+                className="text-2xl font-medium tracking-tight text-black sm:text-3xl"
+                style={playfair}
+              >
+                Perks, Culture & Quality of Life
+              </h2>
+            </div>
+            <ul className="grid grid-cols-1 gap-x-6 gap-y-2 md:grid-cols-2 md:gap-y-3">
+              <li className={featureRowClassName}>
+                <Check className={featureIconClassName} aria-hidden />
+                <p className="text-sm font-light leading-relaxed text-gray-500 sm:text-base">
+                  State-of-the-art office spaces with premium amenities
+                </p>
+              </li>
+              <li className={featureRowClassName}>
+                <Check className={featureIconClassName} aria-hidden />
+                <p className="text-sm font-light leading-relaxed text-gray-500 sm:text-base">
+                  Team events, retreats, and cultural activities
+                </p>
+              </li>
+              <li className={featureRowClassName}>
+                <Check className={featureIconClassName} aria-hidden />
+                <p className="text-sm font-light leading-relaxed text-gray-500 sm:text-base">
+                  Catered meals and premium coffee/snacks
+                </p>
+              </li>
+              <li className={featureRowClassName}>
+                <Check className={featureIconClassName} aria-hidden />
+                <p className="text-sm font-light leading-relaxed text-gray-500 sm:text-base">
+                  Innovation time for personal projects
+                </p>
+              </li>
+            </ul>
+          </section>
+
+          {/* Why Join Hushh Technologies? — home-style CTA card + primary black button */}
+          <section className="mx-auto w-full max-w-3xl rounded-2xl border border-gray-200/60 bg-ios-gray-bg p-6 text-center transition-colors hover:border-hushh-blue/30 sm:p-8">
+            <h2
+              className="mb-3 text-xl font-medium tracking-tight text-black sm:mb-4 sm:text-3xl md:text-4xl"
+              style={playfair}
+            >
+              Why Join Hushh Technologies?
+            </h2>
+            <p className="mb-6 text-sm font-light leading-relaxed text-gray-500 sm:mb-8 sm:text-base md:text-lg">
+              At Hushh Technologies, you'll be part of a team that's revolutionizing the investment industry
+              through cutting-edge AI and quantitative methods. You'll work alongside brilliant minds, solve
+              complex challenges, and directly impact the future of finance while enjoying unparalleled benefits
+              and growth opportunities.
+            </p>
+            <a
+              href="/career"
+              className="inline-flex h-14 w-full items-center justify-center gap-2 rounded-full border border-black bg-black px-6 text-sm font-semibold tracking-wide text-white shadow-lg transition-all duration-200 ease-out hover:-translate-y-px hover:bg-black/90 hover:shadow-xl active:translate-y-0 active:scale-[0.98] sm:w-auto sm:min-w-[200px]"
+            >
+              View Open Positions
+            </a>
+          </section>
+        </div>
+      </main>
+    </div>
   );
 };
 
